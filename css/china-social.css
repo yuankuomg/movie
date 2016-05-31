@@ -1,0 +1,148 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "china-social";
+  src:url("../fonts/china-social.eot");
+  src:url("../fonts/china-social.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/china-social.woff") format("woff"),
+    url("../fonts/china-social.ttf") format("truetype"),
+    url("../fonts/china-social.svg#china-social") format("svg");
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+[data-icon]:before {
+  font-family: "china-social" !important;
+  content: attr(data-icon);
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[class^="icon-"]:before,
+[class*=" icon-"]:before {
+  font-family: "china-social" !important;
+  font-style: normal !important;
+  font-weight: normal !important;
+  font-variant: normal !important;
+  text-transform: none !important;
+  speak: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-taobao:before {
+  content: "a";
+}
+.icon-weibo:before {
+  content: "b";
+}
+.icon-tt:before {
+  content: "c";
+}
+.icon-qq:before {
+  content: "d";
+}
+.icon-wechat:before {
+  content: "e";
+}
+.icon-baidu:before {
+  content: "f";
+}
+.icon-py:before {
+  content: "g";
+}
+.icon-duoban:before {
+  content: "h";
+}
+.icon-renren:before {
+  content: "i";
+}
+.icon-qzone:before {
+  content: "j";
+}
+.icon-kaixin:before {
+  content: "k";
+}
+.icon-mi:before {
+  content: "l";
+}
+.icon-cweibo:before {
+  content: "m";
+}
+.icon-ctaobao:before {
+  content: "n";
+}
+.icon-ctt:before {
+  content: "o";
+}
+.icon-cqq:before {
+  content: "p";
+}
+.icon-cduoban:before {
+  content: "q";
+}
+.icon-cpy:before {
+  content: "r";
+}
+.icon-cbaidu:before {
+  content: "s";
+}
+.icon-cweichat:before {
+  content: "t";
+}
+.icon-cmi:before {
+  content: "u";
+}
+.icon-ckaixin:before {
+  content: "v";
+}
+.icon-cqzone:before {
+  content: "w";
+}
+.icon-crenren:before {
+  content: "x";
+}
+.icon-rtaobao:before {
+  content: "y";
+}
+.icon-rweibo:before {
+  content: "z";
+}
+.icon-rtt:before {
+  content: "A";
+}
+.icon-rqq:before {
+  content: "B";
+}
+.icon-rweichat:before {
+  content: "C";
+}
+.icon-rbaidu:before {
+  content: "D";
+}
+.icon-rpy:before {
+  content: "E";
+}
+.icon-rduoban:before {
+  content: "F";
+}
+.icon-rrenren:before {
+  content: "G";
+}
+.icon-rqzone:before {
+  content: "H";
+}
+.icon-rkaixin:before {
+  content: "I";
+}
+.icon-rmi:before {
+  content: "J";
+}
