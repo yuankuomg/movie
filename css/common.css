@@ -2,4 +2,7 @@ html,
 body {
   height: 100%;
 }
+.row {
+  margin: 0;
+}
 /*# sourceMappingURL=common.css.map */

@@ -6,30 +6,197 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title></title>
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/common.css"/>
-		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<link rel="stylesheet" type="text/css" href="css/common.css" />
+		<link rel="stylesheet" type="text/css" href="css/slick.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
 		<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
-			
+		<script src="js/slick.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/index.js" type="text/javascript" charset="utf-8"></script>
 	</head>
 
 	<body>
-		<div class="sidebar">
-			<nav>
-				<ul class="nav nav-pills nav-stacked">
-					<li class="active">
-						<a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
-					<li><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
-					<li><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
-					<li><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
-					<li><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
-				</ul>
-			</nav>
-		</div>
+		<nav class="sidebar">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a href="#"><i class="glyphicon glyphicon-home"></i></a></li>
+				<li><a href="#"><i class="glyphicon glyphicon-film"></i></a></li>
+				<li><a href="#"><i class="glyphicon glyphicon-th-list"></i></a></li>
+				<li><a href="#"><i class="glyphicon glyphicon-user"></i></a></li>
+				<li><a href=""><i class="glyphicon glyphicon-search"></i></a></li>
+			</ul>
+		</nav>
+		<div class="main">
+			<nav class="navbar navbar-default">
+				<div class="container-fluid">
+					<div class="navbar-header">
+						<span class="navbar-brand">Movie Info</span>
+					</div>
+					<form class="navbar-form navbar-right" role="search">
+						<div class="input-group">
+							<input type="text" class="form-control" placeholder="Search for...">
+							<span class="input-group-btn">
+        						<button class="btn btn-default" type="submit">Go!</button>
+      						</span>
+						</div>
+					</form>
 
-		<div class="container-fluid">
-			asdasdasdddddddddddddddddddddddddddddddddddddddddd
+				</div>
+			</nav>
+			<div id="indexSlide">
+				<div>
+					<img src="img/header-slide-1.jpg" />
+					<div class="slide-des">
+						<h2>美国队长3：内战</h2>
+						<p class="movie-des">上映日期：xxxx-xx-xx</p>
+						<p class="movie-des">评分：
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+								</p>
+						<p class="movie-des">主演：xxxx xxxx xxxx</p>
+						<p class="movie-des">The special bond that develops between plus-sized inflatable robot Baymax, and prodigy Hiro Hamada, who team up with a group of friends to form a band of high-tech heroes.</p>
+						<button class="btn btn-primary btn-block"><i class="glyphicon glyphicon-film"></i>预告片</button>
+					</div>
+					<div class="slide-des-bottom row">
+						<p class="col-xs-6 text-center">上映日期：xxxx-xx-xx</p>
+						<p class="col-xs-6 text-center">评分：
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+						</p>
+					</div>
+				</div>
+				<div>
+					<img src="img/header-slide-2.jpg" />
+				</div>
+				<div>
+					<img src="img/header-slide-3.jpg" />
+				</div>
+				<div>
+					<img src="img/header-slide-4.jpg" />
+				</div>
+				<div>
+					<img src="img/header-slide-5.jpg" />
+				</div>
+				<div>
+					<img src="img/header-slide-6.jpg" />
+				</div>
+			</div>
+			<div id="indexSubSlide" class="slick-dots">
+				<div class="subslide-thumb">
+					<img src="img/index-subslide-1.jpg" />
+				</div>
+				<div class="subslide-thumb">
+					<img src="img/index-subslide-2.jpg" />
+				</div>
+				<div class="subslide-thumb">
+					<img src="img/index-subslide-3.jpg" />
+				</div>
+				<div class="subslide-thumb">
+					<img src="img/index-subslide-4.jpg" />
+				</div>
+				<div class="subslide-thumb">
+					<img src="img/index-subslide-5.jpg" />
+				</div>
+				<div class="subslide-thumb">
+					<img src="img/index-subslide-6.jpg" />
+				</div>
+			</div>
+			<div class="row info">
+				<div class="col-xs-12 col-md-5">
+					<div class="thumbnail row">
+						<div class="col-xs-12 col-sm-4">
+							<a href="" class="thumbnail-pic">
+								<img src="img/index-subslide-1.jpg" class="thumb-pic1">
+								<img src="img/header-slide-1.jpg" class="thumb-pic2">
+
+							</a>
+						</div>
+						<div class="col-xs-12 col-sm-8">
+							<div class="caption">
+								<h3>美国队长3：内战</h3>
+								<hr />
+								<p>上映日期：xxxx-xx-xx</p>
+								<p>评分：
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+								</p>
+								<a href="" class="btn btn-primary">详细</a>
+								<a href="" class="btn btn-primary">预告片</a>
+							</div>
+						</div>
+					</div>
+					<div class="thumbnail row">
+						<div class="col-xs-12 col-sm-4">
+							<a href="" class="thumbnail-pic">
+								<img src="img/index-subslide-2.jpg" class="thumb-pic1">
+								<img src="img/header-slide-2.jpg" class="thumb-pic2">
+
+							</a>
+						</div>
+						<div class="col-xs-12 col-sm-8">
+							<div class="caption">
+								<h3>疯狂动物城</h3>
+								<hr />
+								<p>上映日期：xxxx-xx-xx</p>
+								<p>评分：
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+								</p>
+								<a href="" class="btn btn-primary">详细</a>
+								<a href="" class="btn btn-primary">预告片</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-6 latest-news">
+					<h3>最新资讯</h3>
+					<div class="row">
+						<div class="col-xs-12">
+							<h4>Lorem Ipsum Dolor Sit Amet</h4>
+							<p class="news-time">Nov 11 2014</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+						</div>
+						<div class="col-xs-12">
+							<h4>Lorem Ipsum Dolor Sit Amet</h4>
+							<p class="news-time">Nov 11 2014</p>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
+						</div>
+					</div>
+					<a href="" class="btn btn-primary btn-more-news">更多</a>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="footer-header">
+					<div class="skew">
+
+					</div>
+				</div>
+				<div class="row footer-body">
+					<div class="col-xs-12 col-sm-4 website-des">
+						<p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+						<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
+					</div>
+					<div class="col-xs-12 col-sm-4 col-sm-offset-2 contact">
+						<h4>联系我们</h4>
+						<address>
+  							<strong>地址：</strong>加悦大厦&nbsp;&nbsp;龙口大厦<br>
+  							<strong>电话：</strong>(123) 456-7890
+						</address>
+					</div>
+				</div>
+			</div>
 		</div>
 	</body>
 
