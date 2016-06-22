@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>注册</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/login.css" />
+	<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/message.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			// var uname = $.getCookie("username");
+			// var pwd = $.getCookie("password");
+			// if(uname && pwd){
+			//   $("#username").val(uname);
+			//   $("#password").val(pwd);
+			//   $("#rememberMe").parent().addClass("checked");
+			// }
+			var loginData = JSON.parse(sessionStorage.getItem("login"));
+			if(loginData){
+				$("#username").val(loginData.username);
+				$("#password").val(loginData.password);
+				$("#rememberMe").attr("checked", "checked");
+			}
+      		$("#loginForm").submit(function(){
+			uname = $("#username").val();
+			pwd = $("#password").val();
+				if(!$.vaildate.isEmpty(uname)){
+				$.alt({
+					type: "warning",
+					msg: "用户名不能为空",
+					el: ".message"
+					});
+				$("#username").focus();
+				return false;
+				}
+			if(!$.vaildate.isEmpty(pwd)){
+				$.alt({
+					type: "warning",
+					msg: "密码不能为空",
+					el: ".message"
+				});
+				$("#password").focus();
+				return false;
+			}
+			// if(!$.vaildate.isEmail(uname) || !$.vaildate.isWord(pwd)){
+			// 	$.alt({
+			// 		type: "warning",
+			// 		msg: "账号或密码格式不正确",
+			// 		el: ".message"
+			// 	});
+			// 	return false;
+			// }
+			var data = {username: uname, password: pwd};
+			$._ajax({
+				url: "/user/login",
+				type: "post",
+				data: data,
+				dataType: "json"
+			}).done(function(resData){
+				if(resData.success){
+				$.alt({
+					type: "success",
+					msg: "登录成功",
+					el: ".message"
+				});
+				if($("#rememberMe").is(":checked")){
+					sessionStorage.setItem("login", JSON.stringify(data));
+				}else{
+					sessionStorage.removeItem("login");
+				}
+				window.location = "/info.html";
+				}else{
+				$.alt({
+					type: "danger",
+					msg: "登录失败",
+					el: ".message"
+				});
+				}
+			}).always(function(){
+			});
+			// try{
+			//     var ajax = new XMLHttpRequest();
+			//     //get方法
+			//     // ajax.open("get", "/login?username=" + name + "&password=" + pwd, true);
+			//     // ajax.send();
+			//     //post方法
+			//     // ajax.open("post", "/login", true);
+			//     // ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			//     // ajax.send("username=" + name + "&password=" + pwd);
+			//     //
+			//     // ajax.onreadystatechange = function(){
+			//     //   if(ajax.readyState == 4 && ajax.status == 200){
+			//     //     alert(ajax.responseText);
+			//     //   }
+			//     // }
+
+			// }catch(err){
+			//   console.log(err);
+			// }
+			
+			return false;
+    });
+  });
+		</script>
+
+</head>
+
+<body>
+	<nav class="sidebar">
+		<ul class="nav nav-pills nav-stacked">
+			<li><a href="index.html"><i class="glyphicon glyphicon-home"></i></a></li>
+			<li><a href="trailer.html"><i class="glyphicon glyphicon-film"></i></a></li>
+			<li><a href="list.html"><i class="glyphicon glyphicon-th-list"></i></a></li>
+			<li><a href="news.html"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+			<li class="active"><a href="info.html"><i class="glyphicon glyphicon-user"></i></a></li>
+			<li><a href="" data-toggle="modal" data-target="#searchModal"><i class="glyphicon glyphicon-search"></i></a></li>
+		</ul>
+	</nav>
+	<!--模态框开始-->
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<!--<button class="btn modal-close-btn" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>-->
+				<div class="modal-body">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+        						<button class="btn btn-default" type="submit">Go!</button>
+      						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框结束-->
+	<div class="main">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<span class="navbar-brand">Movie Info</span>
+				</div>
+
+				<form class="navbar-form navbar-right" role="search">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+        						<button class="btn btn-default" type="submit">Go!</button>
+      						</span>
+					</div>
+				</form>
+			</div>
+		</nav>
+		<div class="message text-center"></div>
+		<form class="form-horizontal" id="loginForm">
+			<div class="form-group">
+				<label for="username" class="col-xs-12 col-sm-2 control-label">用户名：</label>
+				<div class="col-xs-12 col-sm-10">
+					<input type="text" class="form-control" id="username" placeholder="用户名" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-xs-12 col-sm-2 control-label">密码：</label>
+				<div class="col-xs-12 col-sm-10">
+					<input type="password" class="form-control" id="password" placeholder="密码"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12 col-sm-10 col-sm-offset-2">
+					<div class="checkbox">
+						<label>
+     			 			<input type="checkbox" id="rememberMe">记住我
+    					</label>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12 text-center">
+					<button type="submit" class="btn btn-primary">登录</button>
+				</div>
+			</div>
+		</form>
+		<div class="footer">
+			<div class="footer-header">
+				<div class="skew">
+
+				</div>
+			</div>
+			<div class="row footer-body">
+				<div class="col-xs-12 col-sm-4 website-des">
+					<p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-sm-offset-2 contact">
+					<h4>联系我们</h4>
+					<address>
+						<strong>地址：</strong>加悦大厦&nbsp;&nbsp;龙口大厦<br>
+						<strong>电话：</strong>(123) 456-7890
+					</address>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

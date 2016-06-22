@@ -1,0 +1,34 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>管理员账号</th>
+            <th>管理员密码</th>
+            <th>超级管理员</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%admins.map(function(admin){%>
+        <tr>
+            <td><%= admin.id%></td>
+            <td><%= admin.name%></td>
+            <td><%= admin.pwd%></td>
+            <td><%= admin.issuper ? "否" : "是"%></td>
+        </tr>
+        <%})%>
+    </tbody>
+</table>
+<span class="glyphicon glyphicon-plus" id="addAdminPage"></span>
+<script type="text/javascript">
+    $("#addAdminPage").click(function(){
+        $(".circle").show();
+        $._ajax({
+            url: "/admin/addadminpage",
+            dataType: "html"
+        }).done(function(html){
+                $("#ajaxPanel").html(html);
+        }).always(function(){
+            $(".circle").hide();
+        });
+    });
+</script>

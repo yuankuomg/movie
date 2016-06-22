@@ -1,0 +1,50 @@
+@import "common-var.less";
+.modal.fade .modal-dialog {
+	.modal-content {
+		a {
+			display: inline-block;
+			padding: 1px 2px;
+			text-align: center;
+			transition: @transition;
+			text-decoration: none;
+			border-radius: 4px;
+			&:focus,
+			&:hover {
+				color: white;
+			}
+		}
+		.modal-body {
+			embed{
+				width: 100%;
+			}
+		}
+		.modal-close-btn {
+			outline: 0;
+			position: absolute;
+			right: -12px;
+			top: -12px;
+			z-index: 999;
+			border-radius: 50%;
+			height: 30px;
+			width: 30px;
+			line-height: 30px;
+			padding: 0 0 0 1px;
+			background-color: @black;
+			color: white;
+			transition: @transition;
+			&:hover,
+			&:focus {
+				background-color: white;
+				color: @black;
+			}
+		}
+	}
+}
+.modal-lg {
+	width: 90%;
+}
+@media (min-width: 1025px) {
+	.modal-lg {
+		width: 1000px;
+	}
+}

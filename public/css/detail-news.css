@@ -1,0 +1,78 @@
+p {
+  word-wrap: break-word;
+}
+.list-content {
+  padding-left: 20px;
+}
+.list-content .list-content-title {
+  padding-left: 15px;
+}
+.list-content .thumbnail {
+  margin-bottom: 40px;
+}
+.list-content .thumbnail .post-pic {
+  padding-left: 0;
+}
+.list-content .thumbnail .movie-des {
+  padding-left: 0;
+}
+.list-content .thumbnail .movie-des .caption h3 {
+  margin-top: 0;
+}
+.list-content .list-group-item {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+.list-content .list-group-item:last-child {
+  border-bottom: none;
+}
+.list-content .may-like {
+  border-top: 3px solid black;
+}
+.list-content .may-like .list-group-item {
+  overflow: hidden;
+}
+.list-content .may-like .list-group-item h3 {
+  margin: 10px 0;
+}
+.list-content .may-like .list-group-item img {
+  margin-right: 3px;
+  float: left;
+}
+.list-content .may-like .list-group-item .item-des {
+  width: 70%;
+  float: left;
+}
+.list-content .may-like .list-group-item .item-des .item-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.list-content .may-like .list-group-item .item-des p {
+  margin: 0;
+}
+.list-content .may-like .may-like-title {
+  border-bottom: none;
+}
+.list-content .article-list li:not(.article-list-title) {
+  background: url("../img/article-arrow.png") no-repeat 0 center;
+  font-size: 12.6px;
+}
+.list-content .article-list .article-list-title {
+  background-color: #383838;
+  color: white;
+}
+@media (max-width: 768px) {
+  .movie-list .thumbnail .movie-des .caption h3 {
+    margin-top: 10px;
+  }
+}
+.new-content {
+  text-indent: 2em;
+}
+.may-like {
+  margin-top: 63px;
+}
+/*# sourceMappingURL=detail-news.css.map */

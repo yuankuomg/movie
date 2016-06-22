@@ -1,0 +1,46 @@
+@import 'common-var.less';
+.trailer-list {
+	padding-left: 20px;
+	.trailer-title {
+		padding-left: 15px;
+	}
+	.thumbnail {
+		.thumbnail-pic {
+			display: block;
+			position: relative;
+			outline: 0;
+			i {
+				position: absolute;
+				top: 0;
+				text-align: center;
+				font-size: 30px;
+				background-color: black;
+				opacity: 0;
+				width: 100%;
+				height: 100%;
+				transition: @transition;
+				&:before {
+					color: grey;
+					font-size: 100px;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%, -50%);
+					-webkit-transform: translate(-50%, -50%);
+					-moz-transform: translate(-50%, -50%);
+					-ms-transform: translate(-50%, -50%);
+				}
+				&:hover,
+				&:focus {
+					opacity: 0.8;
+				}
+			}
+		}
+		.trailer-des .caption .text-center {
+			margin: 10px 0;
+			overflow: hidden;
+			white-space: nowrap;
+			text-overflow: ellipsis;
+		}
+	}
+}

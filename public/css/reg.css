@@ -1,0 +1,23 @@
+form {
+  margin: 40px 25% 0 18%;
+}
+.form-horizontal .form-group {
+  margin-right: 0;
+  margin-left: 0;
+}
+form label[class*="col"] {
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (max-width: 768px) {
+  form label[class*="col"] {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+}
+@media (max-width: 505px) {
+  form {
+    margin: 30px 1% 0 1%;
+  }
+}
+/*# sourceMappingURL=reg.css.map */

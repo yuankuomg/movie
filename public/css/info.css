@@ -1,0 +1,67 @@
+.form-horizontal .form-group {
+  margin-right: 0;
+  margin-left: 0;
+}
+.user-info .user-info-title {
+  padding-left: 30px;
+  margin-bottom: 20px;
+}
+.user-info *[class*="col"] {
+  padding-left: 0;
+  padding-right: 0;
+}
+.list-group-item {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+}
+.list-group-item:last-child {
+  border-bottom: none;
+}
+.movie-rate {
+  margin-top: 73px;
+  border-top: 3px solid black;
+}
+.movie-rate .list-group-item {
+  overflow: hidden;
+}
+.movie-rate .list-group-item h3 {
+  margin: 10px 0;
+}
+.movie-rate .list-group-item img {
+  margin-right: 3px;
+  float: left;
+}
+.movie-rate .list-group-item .item-des {
+  width: 70%;
+  float: left;
+}
+.movie-rate .list-group-item .item-des .item-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.movie-rate .list-group-item .item-des p {
+  margin: 0;
+}
+.movie-rate .movie-rate-title {
+  border-bottom: none;
+}
+@media (min-width: 769px) and (max-width: 991px) {
+  .user-info {
+    padding: 0 10% 0 5%;
+  }
+  .movie-rate {
+    margin-top: 0;
+  }
+}
+@media (max-width: 768px) {
+  .user-info {
+    padding: 0 5%;
+  }
+  .movie-rate {
+    margin-top: 0;
+  }
+}
+/*# sourceMappingURL=info.css.map */

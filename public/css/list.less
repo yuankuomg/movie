@@ -1,0 +1,76 @@
+@import 'common-var.less';
+p {
+	word-wrap: break-word;
+}
+.list-content {
+	padding-left: 20px;
+	.list-content-title {
+		padding-left: 15px;
+	}
+	.thumbnail {
+		margin-bottom: 40px;
+		.post-pic {
+			padding-left: 0;
+		}
+		.movie-des {
+			padding-left: 0;
+			.caption {
+				h3 {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+	.list-group-item {
+		border-radius: 0;
+		border: none;
+		border-bottom: 1px solid #ddd;
+		margin: 0;
+		&:last-child {
+			border-bottom: none;
+		}
+	}
+	.may-like {
+		border-top: 3px solid black;
+		.list-group-item {
+			overflow: hidden;
+			h3 {
+				margin: 10px 0;
+			}
+			img {
+				margin-right: 3px;
+				float: left;
+			}
+			.item-des {
+				width: 70%;
+				float: left;
+				.item-title {
+					overflow: hidden;
+					white-space: nowrap;
+					text-overflow: ellipsis;
+				}
+				p {
+					margin: 0;
+				}
+			}
+		}
+		.may-like-title {
+			border-bottom: none;
+		}
+	}
+	.article-list {
+		li:not(.article-list-title) {
+			background: url("../img/article-arrow.png") no-repeat 0 center;
+			font-size: 12.6px;
+		}
+		.article-list-title {
+			background-color: @black;
+			color: white;
+		}
+	}
+}
+@media (max-width: 768px) {
+	.movie-list .thumbnail .movie-des .caption h3 {
+		margin-top: 10px;
+	}
+}
