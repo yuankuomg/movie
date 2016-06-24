@@ -69,3 +69,31 @@ exports.getDatailNews = (conn, id) => {
         });
     });
 }
+
+exports.getRandMovie = (conn) => {
+    let sql = `SELECT name,rate,time,slideimg1,slideimg2,bilisource from movie order by rand() limit 2`;
+    return new promise((resolve, reject) => {
+        conn.query(sql, (err, rows) => {
+            conn.release();
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
+}
+
+exports.getlatestNews = (conn) => {
+    let sql = `SELECT id,title,date,quotation from news order by date desc limit 2`;
+    return new promise((resolve, reject) => {
+        conn.query(sql, (err, rows) => {
+            conn.release();
+            if (err) {
+                reject(err);
+            } else {
+                resolve(rows);
+            }
+        });
+    });
+}

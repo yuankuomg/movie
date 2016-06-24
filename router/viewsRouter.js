@@ -9,6 +9,8 @@ viewsRouter.get("/news.html", viewsService.news);
 viewsRouter.get("/detail-new/:id", viewsService.detail_new);
 viewsRouter.get("/info.html", viewsService.info);
 
+viewsRouter.get("/randmovie", viewsService.randmovie);
+viewsRouter.get("/latestnews", viewsService.latestnews);
 
 
 module.exports = viewsRouter;

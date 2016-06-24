@@ -9,10 +9,11 @@
 		<link rel="stylesheet" type="text/css" href="/css/common.css" />
 		<link rel="stylesheet" type="text/css" href="/css/modal.css"/>
 		<link rel="stylesheet" type="text/css" href="/css/detail-news.css"/>
+		
 		<script src="/js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="/js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
-			<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
 
 	</head>
 
@@ -47,7 +48,7 @@
 
 				<div class="col-xs-12 col-md-9">
 				<h2 class="new-title text-center"><%=detail_new.title%></h2>
-					<p class="new-content"><%=detail_new.main%></p>
+					<p class="new-content"><%-detail_new.main%></p>
 				</div>
 				<div class="col-xs-12 col-md-3">
 					<ul class="list-group may-like">

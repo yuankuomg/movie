@@ -14,9 +14,10 @@
 	<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/slick.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/message.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/index.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
-	
+
 </head>
 
 <body>
@@ -68,111 +69,63 @@
 				<div>
 					<img src="img/<%=slideMovie.slideimg1%>" />
 					<div class="slide-des">
-						<h2><a href=""><%=slideMovie.name%></a></h2>
-						<p class="movie-des">上映日期：<%=slideMovie.time%></p>
+						<h2>
+							<a href="">
+								<%=slideMovie.name%>
+							</a>
+						</h2>
+						<p class="movie-des">上映日期：
+							<%=slideMovie.time%>
+						</p>
 						<p class="movie-des">评分：
 							<%for(var i = 0,j = slideMovie.rate; i < 5; i++, j--){%>
 								<%if(j > 0){%>
 									<a href=""><i class="glyphicon glyphicon-star"></i></a>
-								<%}else{%>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<%}%>
-							<%}%>
+									<%}else{%>
+										<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+										<%}%>
+											<%}%>
 						</p>
-						<p class="movie-des">主演：<%=slideMovie.actor%></p>
-						<p class="movie-des"><%=slideMovie.describe%></p>
+						<p class="movie-des">主演：
+							<%=slideMovie.actor%>
+						</p>
+						<p class="movie-des">
+							<%=slideMovie.describe%>
+						</p>
 						<a href="http://www.bilibili.com/video/<%=slideMovie.bilisource%>" target="_blank" class="btn btn-primary btn-block btn-watch-trailer">
 							<i class="glyphicon glyphicon-film"></i>&nbsp;预告片</a>
 					</div>
 					<div class="slide-des-bottom row">
-						<p class="col-xs-6 text-center">上映日期：<%=slideMovie.time%></p>
+						<p class="col-xs-6 text-center">上映日期：
+							<%=slideMovie.time%>
+						</p>
 						<p class="col-xs-6 text-center">评分：
 							<%for(var i = 0,j = slideMovie.rate; i < 5; i++, j--){%>
 								<%if(j > 0){%>
 									<a href=""><i class="glyphicon glyphicon-star"></i></a>
-								<%}else{%>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<%}%>
-							<%}%>
+									<%}else{%>
+										<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+										<%}%>
+											<%}%>
 						</p>
 					</div>
 				</div>
-			<%})%>
+				<%})%>
 		</div>
 		<div id="indexSubSlide">
 			<%slideMovies.map(function(slideMovie){%>
 				<div class="subslide-thumb">
 					<img src="img/<%=slideMovie.slideimg2%>" />
 				</div>
-			<%})%>
+				<%})%>
 		</div>
 		<div class="row info">
 			<div class="col-xs-12 col-md-5" id="randMovie">
-				<div class="thumbnail row">
-					<div class="col-xs-12 col-sm-4">
-						<a href="" class="thumbnail-pic">
-							<img src="img/index-subslide-1.jpg" class="thumb-pic1">
-							<img src="img/header-slide-1.jpg" class="thumb-pic2">
-						</a>
-					</div>
-					<div class="col-xs-12 col-sm-8">
-						<div class="caption">
-							<h3>美国队长3：内战</h3>
-							<hr />
-							<p>上映日期：xxxx-xx-xx</p>
-							<p>评分：
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-							</p>
-							<a href="" class="btn btn-primary">详细</a>
-							<a href="http://www.bilibili.com/video/av4873874/" target="_blank" class="btn btn-primary btn-watch-trailer">预告片</a>
-						</div>
-					</div>
-				</div>
-				<div class="thumbnail row">
-					<div class="col-xs-12 col-sm-4">
-						<a href="" class="thumbnail-pic">
-							<img src="img/index-subslide-2.jpg" class="thumb-pic1">
-							<img src="img/header-slide-2.jpg" class="thumb-pic2">
-
-						</a>
-					</div>
-					<div class="col-xs-12 col-sm-8">
-						<div class="caption">
-							<h3>疯狂动物城</h3>
-							<hr />
-							<p>上映日期：xxxx-xx-xx</p>
-							<p>评分：
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-							</p>
-							<a href="" class="btn btn-primary">详细</a>
-							<a href="http://www.bilibili.com/video/av4873874/" target="_blank" class="btn btn-primary btn-watch-trailer">预告片</a>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 			<div class="col-xs-12 col-md-6 latest-news">
 				<h3>最新资讯</h3>
-				<div class="row">
-					<div class="col-xs-12">
-						<h4><a href="">Lorem Ipsum Dolor Sit Amet</a></h4>
-						<p class="news-time">Nov 11 2014</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-					</div>
-					<div class="col-xs-12">
-						<h4><a href="">Lorem Ipsum Dolor Sit Amet</a></h4>
-						<p class="news-time">Nov 11 2014</p>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-							aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.</p>
-					</div>
+				<div class="row" id="latestNews">
 				</div>
 				<a href="news.html" class="btn btn-primary btn-more-news">更多</a>
 			</div>
@@ -199,5 +152,5 @@
 		</div>
 	</div>
 </body>
-
+<script src="/js/indexOnload.js" type="text/javascript" charset="utf-8"></script>
 </html>

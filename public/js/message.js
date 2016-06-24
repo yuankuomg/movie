@@ -9,6 +9,8 @@
                 window.location = "404.html";
             } else if (err.status == 500) {
                 window.location = "500.html";
+            } else if (err.status == 0) {
+                window.location = "/login.html";
             }
         });
     }
@@ -42,7 +44,16 @@
             return /\S/.test(str);
         },
         isWord: function (str) {
-            return /[\w-\.]/.test(str);
+            return /^([\w-\.]+)$/.test(str);
+        },
+        isNumber: function (str) {
+            return /^\d+$/.test(str);
+        },
+        isImage: function(str){
+            return /^image\/.*/.test(str);
+        },
+        imageSizeLimit: function(size){
+            return size <= (1024 * 1024) ? true : false;
         }
     }
 
@@ -61,3 +72,38 @@
         }
     }
 });
+
+// $(function () {
+//     window.onhashchange = function () {
+//         $(".circle").show();
+//         if (location.hash == "#logout") {
+//             $._ajax({
+//                 url: "/login/logout"
+//             }).done(function (resData) {
+//                 if (resData.success) {
+//                     window.location = "/login.html";
+//                 }
+//             }).always(function () {
+//                 $(".circle").hide();
+//             });
+//         } else if (location.hash == "#admin") {
+//             $._ajax({
+//                 url: "/admin/admin",
+//                 dataType: "html"
+//             }).done(function (html) {
+//                 $("#content").html(html);
+//             }).always(function () {
+//                 $(".circle").hide();
+//             });
+//         } else if (location.hash == "#addAdminPage") {
+//             $._ajax({
+//                 url: "/admin/addadminpage",
+//                 dataType: "html"
+//             }).done(function (html) {
+//                 $("#content").html(html);
+//             }).always(function () {
+//                 $(".circle").hide();
+//             });
+//         }
+//     }
+// });

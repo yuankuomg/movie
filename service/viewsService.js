@@ -43,8 +43,8 @@ exports.news = (req, res, next) => {
 exports.detail_new = (req, res, next) => {
     co(function* () {
         let conn = yield util.getConn();
-        // let param = qs.parse(url.parse(req.url).query);
         let detail_new = yield viewsModule.getDatailNews(conn, req.params.id);
+         detail_new[0].main = parser.parse(detail_new[0].main);
         res.render("detail-new.html", { detail_new: detail_new[0] });
     }).catch((err) => {
         next(err);
@@ -63,4 +63,28 @@ exports.info = (req, res, next) => {
             next(err);
         });
     }
+}
+
+exports.randmovie = (req, res, next) => {
+    co(function* () {
+        let conn = yield util.getConn();
+        let randMovies = yield viewsModule.getRandMovie(conn);
+        let html = yield util.processRandMovie(randMovies);
+        res.send(html).end();
+    }).catch((err) => {
+        console.log(err);
+        next(err);
+    });
+}
+
+exports.latestnews = (req, res, next) => {
+    co(function* () {
+        let conn = yield util.getConn();
+        let latestNes = yield viewsModule.getlatestNews(conn);
+        let html = yield util.processLatestNes(latestNes);
+        res.send(html).end();
+    }).catch((err) => {
+        console.log(err);
+        next(err);
+    });
 }
