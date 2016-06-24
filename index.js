@@ -62,6 +62,6 @@ app.use(util.errhandle);
 process.on("uncaughtException", (err) => {
     console.log(`有未捕捉到的异常\n${err.stack}`);
 });
-var server = app.listen(80, () => {
+var server = app.listen(3000, () => {
     console.log("服务器启动成功" + new Date());
 });
