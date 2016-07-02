@@ -226,7 +226,7 @@ exports.getYouratricle = (conn, username) => {
 }
 
 exports.getMovieSearchResult = (conn, keyword) => {
-    let sql = `SELECT * FROM movie WHERE name like('%${keyword}%') or actor LIKE('%${keyword}%') or director LIKE('%${keyword}%') or type LIKE('%${keyword}%') or time LIKE('%${keyword}%')  or time LIKE('%${keyword}%') or 'describe' like ('%${keyword}%')`;
+    let sql = `SELECT * FROM movie WHERE name like('%${keyword}%') or actor LIKE('%${keyword}%') or director LIKE('%${keyword}%') or type LIKE('%${keyword}%') or 'describe' like ('%${keyword}%')`;
     return new promise((resolve, reject) => {
         conn.query(sql, (err, rows) => {
             conn.release();
@@ -240,7 +240,7 @@ exports.getMovieSearchResult = (conn, keyword) => {
 }
 
 exports.getNewsSearchResult = (conn, keyword) => {
-    let sql = `SELECT * FROM news WHERE title like('%${keyword}%') or date LIKE('%${keyword}%') `;
+    let sql = `SELECT * FROM news WHERE title like('%${keyword}%') `;
     return new promise((resolve, reject) => {
         conn.query(sql, (err, rows) => {
             conn.release();
@@ -254,7 +254,7 @@ exports.getNewsSearchResult = (conn, keyword) => {
 }
 
 exports.getArticleSearchResult = (conn, keyword) => {
-    let sql = `SELECT a.id,a.title,a.date,a.username,m.name FROM article a LEFT JOIN movie m ON a.mid = m.id WHERE title like('%${keyword}%') or date LIKE('%${keyword}%') `;
+    let sql = `SELECT a.id,a.title,a.date,a.username,m.name FROM article a LEFT JOIN movie m ON a.mid = m.id WHERE title like('%${keyword}%') `;
     return new promise((resolve, reject) => {
         conn.query(sql, (err, rows) => {
             conn.release();
