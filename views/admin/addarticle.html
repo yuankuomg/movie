@@ -1,0 +1,26 @@
+<form novalidate="" role="form" class="form-horizontal" id="addArticleForm">
+    <input type="hidden" id="id" value="<%=article ? article.id : ''%>">
+    <div class="form-group">
+        <label class="col-md-2 control-label">文章标题：</label>
+        <div class="col-md-10">
+            <input type="text" value="<%=article ? article.title : ''%>" id="title" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">内容：</label>
+        <div class="col-md-10">
+            <textarea class="form-control" placeholder="" rows="3" id="main"><%=article ? article.main : ''%></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">电影：</label>
+        <div class="col-md-10">
+            <input style="cursor: default;" type="text" <%=article.name ? "readonly='readonly'" : ''%> value="<%=article ? article.name : ''%>" placeholder="" id="name" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+    </div>
+</form>

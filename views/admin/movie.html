@@ -1,0 +1,35 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>名称</th>
+            <th>评分</th>
+            <th>类型</th>
+            <th>上映时间</th>
+            <th>时长</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%movies.map(function(movie){%>
+        <tr>
+            <td>
+                <input type="checkbox" value="<%=movie.id%>">
+            </td>
+            <td><%= movie.name%></td>
+            <td><%= movie.rate%></td>
+            <td><%= movie.type%></td>
+            <td><%= movie.time%></td>
+            <td><%= movie.long%></td>
+            <td>
+                <a href="#/delmovie/<%=movie.id%>"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="#/addmoviepage/<%=movie.id%>"><span class="glyphicon glyphicon-plus"></span></a>
+            </td>            
+        </tr>
+        <%})%>
+    </tbody>
+</table>
+<div class="btn-group">
+    <a href="" class="btn" id="delSelected"><span class="glyphicon glyphicon-trash"></span></a>
+    <a href="#/addmoviepage/-1" class="btn"><span class="glyphicon glyphicon-plus"></span></a>
+</div>

@@ -1,6 +1,23 @@
 {
     "success": {"success": true},
     "login_err": {"success": false, "message": "账号或密码错误"},
-    "userexist_err": {"success": false, "message": "用户名已存在"}
+    "userexist_err": {"success": false, "message": "用户名已存在"},
+    "addadmin_err": {"success": false, "message": "添加/修改管理员错误"},
+    "deladmin_err": {"success": false, "message": "删除管理员错误"},    
+    "needadmin_err": {"success": false, "message": "需要选择管理员"},    
+
+    "addgoodstype_err": {"success": false, "message": "添加/修改商品分类错误"},
+    "delgoodstype_err": {"success": false, "message": "删除商品分类错误"},    
+    "needgoodstype_err": {"success": false, "message": "需要选择商品分类"},    
+
+    "addgoods_err": {"success": false, "message": "添加/修改商品错误"},    
+    "delgoods_err": {"success": false, "message": "删除商品错误"},    
+    "needgoods_err": {"success": false, "message": "需要选择商品"},  
+
+    "addnews_err": {"success": false, "message": "添加/修改商品错误"},    
+    "delnews_err": {"success": false, "message": "删除商品错误"},    
+    "neednews_err": {"success": false, "message": "需要选择商品"},  
+    "preview_err": {"success": false, "message": "预览错误"},  
     
+    "addimg_err": {"success": false, "message": "上传图片错误"}    
 }

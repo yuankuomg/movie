@@ -65,7 +65,7 @@ exports.processRandMovie = (rows) => {
 							<h3><a href="/detail-movie/${v.id}">${v.name}</a></h3>
 							<hr />
 							<p>上映日期：${v.time}</p>
-							<p>评分：${v.rate}&nbsp;/&nbsp;5</p>
+							<p>豆瓣评分：${v.rate}</p>
 							<a href="/detail-movie/${v.id}" class="btn btn-primary">详细</a>
 							<a href="http://www.bilibili.com/video/${v.bilisource}/" target="_blank" class="btn btn-primary btn-watch-trailer">预告片</a>
 						</div>

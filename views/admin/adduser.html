@@ -1,0 +1,52 @@
+<form novalidate="" role="form" class="form-horizontal" id="addUserForm">
+    <input type="hidden" id="isadd" value="<%=user ? 0 : 1%>">
+    <div class="form-group">
+        <label class="col-md-2 control-label">账号：</label>
+        <div class="col-md-10">
+            <input style="cursor: default;" type="text" <%=user.username ? "readonly='readonly'" : ''%> value="<%=user ? user.username : ''%>" placeholder="" id="username" class="form-control" name="username">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">密码：</label>
+        <div class="col-md-10">
+            <input type="password" value="<%=user ? user.password : ''%>" placeholder="" id="password" class="form-control" name="password">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">重复密码：</label>
+        <div class="col-md-10">
+            <input type="password" value="<%=user ? user.password : ''%>" placeholder="" id="repassword" class="form-control" name="repassword">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-12 col-sm-2 control-label">性别：</label>
+        <div class="col-xs-12 col-sm-10">
+            <label class="radio-inline">
+		  							<input type="radio" name="sex" id="male" value="男" <%=user.sex == '男' ? "checked='checked'" : ''%>>男
+								</label>
+            <label class="radio-inline">
+		  							<input type="radio" name="sex" id="female" value="女" <%=user.sex == '女' ? "checked='checked'" : ''%>>女
+								</label>
+            <label class="radio-inline">
+		  							<input type="radio" name="sex" id="secret" value="保密" <%=user.sex == '保密' ? "checked='checked'" : ''%>>保密
+								</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="birthDate" class="col-xs-12 col-sm-2 control-label">出生日期：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="date" value="<%=user.birthdate%>" class="form-control" id="birthDate" placeholder="出生日期" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sign" class="col-xs-12 col-sm-2 control-label">我的签名：</label>
+        <div class="col-xs-12 col-sm-10">
+            <textarea class="form-control" id="sign" rows="5" placeholder="写点什么吧。。。"><%=user.sign%></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+    </div>
+</form>

@@ -82,12 +82,14 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-body">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-        						<button class="btn btn-default" type="submit">Go!</button>
-      						</span>
-					</div>
+					<form class="" role="search" action="/searchresult.html" id="searchForm">
+						<div class="input-group">
+							<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
+							<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Go!</button>
+						</span>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -123,14 +125,7 @@
 					<span class="navbar-brand">Movie Info</span>
 					<a href="/info.html" class="navbar-text" id="user"></a><a href='/user/logout' class='navbar-text' id='logout' style="display:none;">登出</a>
 				</div>
-				<form class="navbar-form navbar-right" role="search" action="/searchresult.html" id="searchForm">
-					<div class="input-group">
-						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit">Go!</button>
-						</span>
-					</div>
-				</form>
+				
 			</div>
 		</nav>
 		<div class="row movie-content">
@@ -149,16 +144,10 @@
 							<p>上映日期：
 								<%=detail_movie.time%>
 							</p>
-							<p>平均评分：
-								<%=detail_movie.rate%>&nbsp;/&nbsp;5
+							<p>豆瓣评分：
+								<%=detail_movie.rate%>
 							</p>
-							<p>你的评分：
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-							</p>
+
 							<p>演员：
 								<%=detail_movie.actor%>
 							</p>

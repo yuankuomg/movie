@@ -26,14 +26,18 @@ global.fs = require("fs");
 global.util = require("./util/util.js");
 global.userModule = require("./module/userModule.js");
 global.viewsModule = require("./module/viewsModule.js");
-
-// global.adminModule = require("./module/adminModule.js");
+global.loginModule = require("./module/loginModule.js");
+global.adminModule = require("./module/adminModule.js");
+global.movieModule = require("./module/movieModule.js");
+global.newsModule = require("./module/newsModule.js");
 global.viewsService = require("./service/viewsService.js");
 global.userService = require("./service/userService.js");
-// global.adminService = require("./service/adminService.js");
+global.adminService = require("./service/adminService.js");
+global.loginService = require("./service/loginService.js");
 var viewsRouter = require("./router/viewsRouter.js");
 var userRouter = require("./router/userRouter.js");
-// var adminRouter = require("./router/adminRouter.js");
+var adminRouter = require("./router/adminRouter.js");
+var loginRouter = require("./router/loginRouter.js");
 //初始化
 global.message = util.loadMessage();
 var app = express();
@@ -52,10 +56,11 @@ app.set("views", "./views");
 app.set("views engine", "html");
 app.engine(".html", ejs.__express);
 
+app.use(express.static("public"));
 app.use(viewsRouter);
 app.use("/user", userRouter);
-app.use(express.static("public"));
-// app.use("/admin", adminRouter);
+app.use("/login", loginRouter);
+app.use("/admin", adminRouter);
 //404中间件
 app.use(util.notfound);
 //500中间件

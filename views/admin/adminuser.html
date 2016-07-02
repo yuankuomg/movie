@@ -5,30 +5,31 @@
             <th>管理员账号</th>
             <th>管理员密码</th>
             <th>超级管理员</th>
+            <th>操作</th>
         </tr>
     </thead>
     <tbody>
         <%admins.map(function(admin){%>
         <tr>
-            <td><%= admin.id%></td>
-            <td><%= admin.name%></td>
-            <td><%= admin.pwd%></td>
-            <td><%= admin.issuper ? "否" : "是"%></td>
+            <td>
+                <%if(!admin.issuper){%>
+                    <input type="checkbox" value="<%=admin.id%>">
+                <%}%>
+            </td>
+            <td><%= admin.username%></td>
+            <td><%= admin.password%></td>
+            <td><%= admin.issuper ? "是" : "否"%></td>
+            <td>
+                <%if(!admin.issuper){%>
+                    <a href="#/deladmin/<%=admin.id%>"><span class="glyphicon glyphicon-trash"></span></a>
+                    <a href="#/addAdminPage/<%=admin.id%>"><span class="glyphicon glyphicon-plus"></span></a>
+                <%}%>
+            </td>            
         </tr>
         <%})%>
     </tbody>
 </table>
-<span class="glyphicon glyphicon-plus" id="addAdminPage"></span>
-<script type="text/javascript">
-    $("#addAdminPage").click(function(){
-        $(".circle").show();
-        $._ajax({
-            url: "/admin/addadminpage",
-            dataType: "html"
-        }).done(function(html){
-                $("#ajaxPanel").html(html);
-        }).always(function(){
-            $(".circle").hide();
-        });
-    });
-</script>
+<div class="btn-group">
+    <a href="" class="btn" id="delSelected"><span class="glyphicon glyphicon-trash"></span></a>
+    <a href="#/addAdminPage/-1" class="btn"><span class="glyphicon glyphicon-plus"></span></a>
+</div>

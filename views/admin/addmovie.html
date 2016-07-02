@@ -1,0 +1,92 @@
+<form novalidate="" role="form" class="form-horizontal" id="addMovieForm">
+    <input type="hidden" id="id" value="<%=movie ? movie.id : ''%>">
+    <div class="form-group">
+        <label class="col-md-2 control-label">名称：</label>
+        <div class="col-md-10">
+            <input type="text" value="<%=movie ? movie.name : ''%>" placeholder="" id="name" class="form-control" name="name">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">评分：</label>
+        <div class="col-md-10">
+            <input type="text" value="<%=movie ? movie.rate : ''%>" placeholder="" id="rate" class="form-control" name="rate">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label">演员：</label>
+        <div class="col-md-10">
+            <input type="text" value="<%=movie ? movie.actor : ''%>" placeholder="" id="actor" class="form-control" name="actor">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-12 col-sm-2 control-label">导演：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="text" value="<%=movie ? movie.director : ''%>" placeholder="" id="director" class="form-control" name="director">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-xs-12 col-sm-2 control-label">类型：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="text" value="<%=movie ? movie.type : ''%>" placeholder="" id="type" class="form-control" name="type">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="time" class="col-xs-12 col-sm-2 control-label">上映日期：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="date" value="<%=movie ? movie.time : ''%>" class="form-control" id="time" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sign" class="col-xs-12 col-sm-2 control-label">时长：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="text" value="<%=movie ? movie.long : ''%>" class="form-control" id="long" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="describe" class="col-xs-12 col-sm-2 control-label">描述：</label>
+        <div class="col-xs-12 col-sm-10">
+            <textarea class="form-control" id="describe" rows="5" placeholder="写点什么吧。。。"><%=movie.describe%></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sign" class="col-xs-12 col-sm-2 control-label">主轮播图：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="text" value="<%=movie ? movie.slideimg1 : ''%>" class="form-control" id="slideimg1" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sign" class="col-xs-12 col-sm-2 control-label">子轮播图：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="text" value="<%=movie ? movie.slideimg2 : ''%>" class="form-control" id="slideimg2" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sign" class="col-xs-12 col-sm-2 control-label">列表图标：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="text" value="<%=movie ? movie.listimg1 : ''%>" class="form-control" id="listimg1" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sign" class="col-xs-12 col-sm-2 control-label">大列表图标：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="text" value="<%=movie ? movie.listimg2 : ''%>" class="form-control" id="listimg2" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sign" class="col-xs-12 col-sm-2 control-label">预告片图：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="text" value="<%=movie ? movie.trailerimg : ''%>" class="form-control" id="trailerimg" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="sign" class="col-xs-12 col-sm-2 control-label">视频地址：</label>
+        <div class="col-xs-12 col-sm-10">
+            <input type="text" value="<%=movie ? movie.bilisource : ''%>" class="form-control" id="bilisource" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button class="btn btn-info" type="submit">Submit</button>
+        </div>
+    </div>
+</form>

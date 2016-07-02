@@ -1,0 +1,29 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>商品名称</th>
+            <th>上级分类</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%goodstypes.map(function(goodstype){%>
+        <tr>
+            <td>
+                <input type="checkbox" value="<%=goodstype.id%>">
+            </td>
+            <td><%= goodstype.typename%></td>
+            <td><%= goodstype.ptypename%></td>
+            <td>
+                <a href="#/delgoodstype/<%=goodstype.id%>"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="#/addGoodstypePage/<%=goodstype.id%>"><span class="glyphicon glyphicon-plus"></span></a>
+            </td>            
+        </tr>
+        <%})%>
+    </tbody>
+</table>
+<div class="btn-group">
+    <a href="" class="btn" id="delSelected"><span class="glyphicon glyphicon-trash"></span></a>
+    <a href="#/addGoodstypePage/-1" class="btn"><span class="glyphicon glyphicon-plus"></span></a>
+</div>

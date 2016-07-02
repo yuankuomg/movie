@@ -37,12 +37,14 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-body">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-        						<button class="btn btn-default" type="submit">Go!</button>
-      						</span>
-					</div>
+					<form class="" role="search" action="/searchresult.html" id="searchForm">
+						<div class="input-group">
+							<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
+							<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Go!</button>
+						</span>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -55,14 +57,6 @@
 					<span class="navbar-brand">Movie Info</span>
 					<a href="/info.html" class="navbar-text" id="user"></a><a href='/user/logout' class='navbar-text' id='logout' style="display:none;">登出</a>
 				</div>
-				<form class="navbar-form navbar-right" role="search" action="/searchresult.html" id="searchForm">
-					<div class="input-group">
-						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit">Go!</button>
-						</span>
-					</div>
-				</form>
 			</div>
 		</nav>
 		<div id="indexSlide">
@@ -75,9 +69,15 @@
 								<%=slideMovie.name%>
 							</a>
 						</h2>
-						<p class="movie-des">上映日期：<%=slideMovie.time%></p>
-						<p class="movie-des">评分：<%=slideMovie.rate%>&nbsp;/&nbsp;5</p>
-						<p class="movie-des">主演：<%=slideMovie.actor%></p>
+						<p class="movie-des">上映日期：
+							<%=slideMovie.time%>
+						</p>
+						<p class="movie-des">豆瓣评分：
+							<%=slideMovie.rate%>
+						</p>
+						<p class="movie-des">主演：
+							<%=slideMovie.actor%>
+						</p>
 						<p class="movie-des">
 							<%=slideMovie.describe%>
 						</p>
@@ -88,7 +88,8 @@
 						<p class="col-xs-6 text-center">上映日期：
 							<%=slideMovie.time%>
 						</p>
-						<p class="col-xs-6 text-center">评分：<%=slideMovie.rate%>&nbsp;/&nbsp;5
+						<p class="col-xs-6 text-center">豆瓣评分：
+							<%=slideMovie.rate%>
 						</p>
 					</div>
 				</div>
@@ -103,7 +104,7 @@
 		</div>
 		<div class="row info">
 			<div class="col-xs-12 col-md-5" id="randMovie">
-				
+
 			</div>
 			<div class="col-xs-12 col-md-6 latest-news">
 				<h3>最新资讯</h3>
@@ -135,4 +136,5 @@
 	</div>
 </body>
 <script src="/js/indexOnload.js" type="text/javascript" charset="utf-8"></script>
+
 </html>

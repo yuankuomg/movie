@@ -1,0 +1,29 @@
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>电影名称</th>
+            <th>用户名</th>
+            <th>增加时间</th>
+        </tr>
+    </thead>
+    <tbody>
+        <%comments.map(function(comment){%>
+        <tr>
+            <td>
+                <input type="checkbox" value="<%=comment.id%>">
+            </td>
+            <td><%= comment.name%></td>
+            <td><%= comment.username%></td>
+            <td><%= comment.date%></td>
+            <td>
+                <a href="#/delcomment/<%=comment.id%>"><span class="glyphicon glyphicon-trash"></span></a>
+                <a href="#/addcommentpage/<%=comment.id%>"><span class="glyphicon glyphicon-plus"></span></a>
+            </td>            
+        </tr>
+        <%})%>
+    </tbody>
+</table>
+<div class="btn-group">
+    <a href="" class="btn" id="delSelected"><span class="glyphicon glyphicon-trash"></span></a>
+</div>

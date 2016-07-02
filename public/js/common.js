@@ -30,4 +30,7 @@ $(function () {
 			return false;
 		}
 	});
+	$('#searchModal').on('hidden.bs.modal', function (e) {
+		$("#keyword").val("");
+	});
 });

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Bootflat-Admin Template</title>
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="shortcut icon" href="img/favicon_16.ico" />
+  <link rel="bookmark" href="img/favicon_16.ico" />
+  <!-- site css -->
+  <link rel="stylesheet" href="/css/site.min.css">
+  <link rel="stylesheet" href="/css/loading.css">
+
+  <!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+  <!--[if lt IE 9]>
+      <script src="js/html5shiv.js"></script>
+      <script src="js/respond.min.js"></script>
+    <![endif]-->
+  <script type="text/javascript" src="/js/site.min.js"></script>
+  <script type="text/javascript" src="/js/message.js"></script>
+  <style>
+    body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+      background-color: #303641;
+      color: #C1C3C6
+    }
+  </style>
+  <script type="text/javascript">
+  $(function(){
+      // var uname = $.getCookie("username");
+      // var pwd = $.getCookie("password");
+      // if(uname && pwd){
+      //   $("#username").val(uname);
+      //   $("#password").val(pwd);
+      //   $("#rememberMe").parent().addClass("checked");
+      // }
+      var adminLoginData = JSON.parse(sessionStorage.getItem("adminlogin"));
+      if(adminLoginData){
+        $("#username").val(adminLoginData.username);
+        $("#password").val(adminLoginData.password);
+        $("#rememberMe").parent().addClass("checked");
+      }
+      $("#loginForm").submit(function(){
+          uname = $("#username").val();
+          pwd = $("#password").val();
+            if(!$.vaildate.isEmpty(uname)){
+              $.alt({
+                  type: "warning",
+                  msg: "用户名不能为空",
+                  el: ".message"
+                });
+              $("#username").focus();
+              return false;
+            }
+          if(!$.vaildate.isEmpty(pwd)){
+            $.alt({
+                type: "warning",
+                msg: "密码不能为空",
+                el: ".message"
+              });
+            $("#password").focus();
+            return false;
+          }
+          if(!$.vaildate.isWord(uname) || !$.vaildate.isWord(pwd)){
+            $.alt({
+                type: "warning",
+                msg: "账号或密码格式不正确",
+                el: ".message"
+              });
+              return false;
+          }
+          $(".circle").show();
+          var data = {username: uname, password: pwd};
+          $._ajax({
+            url: "/login/login",
+            type: "post",
+            data: data,
+            dataType: "json"
+          }).done(function(resData){
+            if(resData.success){
+              $.alt({
+                type: "success",
+                msg: "登录成功",
+                el: ".message"
+              });
+              if($("#rememberMe").is(":checked")){
+                sessionStorage.setItem("adminlogin", JSON.stringify(data));
+              }else{
+                sessionStorage.removeItem("adminlogin");
+              }
+              window.location = "/admin/index/";
+            }else{
+              $.alt({
+                type: "danger",
+                msg: "登录失败",
+                el: ".message"
+              });
+            }
+          }).always(function(){
+          $(".circle").hide();
+          });
+          // try{
+          //     var ajax = new XMLHttpRequest();
+          //     //get方法
+          //     // ajax.open("get", "/login?username=" + name + "&password=" + pwd, true);
+          //     // ajax.send();
+          //     //post方法
+          //     // ajax.open("post", "/login", true);
+          //     // ajax.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+          //     // ajax.send("username=" + name + "&password=" + pwd);
+          //     //
+          //     // ajax.onreadystatechange = function(){
+          //     //   if(ajax.readyState == 4 && ajax.status == 200){
+          //     //     alert(ajax.responseText);
+          //     //   }
+          //     // }
+
+          // }catch(err){
+          //   console.log(err);
+          // }
+          
+          return false;
+    });
+  });
+          
+    </script>
+</head>
+
+<body>
+  <div class="container">
+    <div class="circle"></div>
+    <form class="form-signin" role="form" action="/login" id="loginForm">
+      <h3 class="form-signin-heading">请登录</h3>
+      <div class="form-group message">
+
+      </div>
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class="glyphicon glyphicon-user"></i>
+          </div>
+          <input type="text" value="admin" class="form-control" name="username" id="username" placeholder="example@example.com" autocomplete="off"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="input-group">
+          <div class="input-group-addon">
+            <i class=" glyphicon glyphicon-lock "></i>
+          </div>
+          <input type="password" value="admin" class="form-control" name="password" id="password" placeholder="Password" autocomplete="off" />
+        </div>
+      </div>
+
+      <label class="checkbox">
+          <input type="checkbox" id="rememberMe" value="remember-me"> &nbsp 记住我
+        </label>
+      <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+
+  </div>
+  <div class="clearfix"></div>
+  <br><br>
+</body>
+
+</html>

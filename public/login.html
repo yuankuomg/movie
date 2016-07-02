@@ -125,12 +125,14 @@
 			<div class="modal-content">
 				<!--<button class="btn modal-close-btn" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>-->
 				<div class="modal-body">
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
-						<span class="input-group-btn">
-        						<button class="btn btn-default" type="submit">Go!</button>
-      						</span>
-					</div>
+					<form class="" role="search" action="/searchresult.html" id="searchForm">
+						<div class="input-group">
+							<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
+							<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Go!</button>
+						</span>
+						</div>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -143,14 +145,7 @@
 					<span class="navbar-brand">Movie Info</span>
 					<a href="/info.html" class="navbar-text" id="user"></a><a href='/user/logout' class='navbar-text' id='logout' style="display:none;">登出</a>
 				</div>
-				<form class="navbar-form navbar-right" role="search" action="/searchresult.html" id="searchForm">
-					<div class="input-group">
-						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
-						<span class="input-group-btn">
-							<button class="btn btn-default" type="submit">Go!</button>
-						</span>
-					</div>
-				</form>
+
 			</div>
 		</nav>
 		<div class="message text-center"></div>

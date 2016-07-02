@@ -20,7 +20,7 @@ $(function () {
                 url: "/login/logout"
             }).done(function (resData) {
                 if (resData.success) {
-                    window.location = "/login.html";
+                    window.location = "/adminlogin.html";
                 }
             }).always(function () {
                 $(".circle").hide();
@@ -79,7 +79,7 @@ $(function () {
 
     }
     var addAdminPage = {
-        url: "/addAdminPage/:id",
+        url: "/addadminpage/:id",
         className: "animated",
         render: function () {
             $(".circle").show();
@@ -106,7 +106,7 @@ $(function () {
                 if (!$.vaildate.isEmpty(uname)) {
                     $.alt({
                         type: "warning",
-                        msg: "邮箱不能为空",
+                        msg: "用户名不能为空",
                         el: ".message"
                     });
                     $("#username").focus();
@@ -121,10 +121,10 @@ $(function () {
                     $("#password").focus();
                     return false;
                 }
-                if (!$.vaildate.isEmail(uname) || !$.vaildate.isWord(pwd)) {
+                if (!$.vaildate.isWord(uname) || !$.vaildate.isWord(pwd)) {
                     $.alt({
                         type: "warning",
-                        msg: "账号或密码格式不正确",
+                        msg: "用户名或密码格式不正确",
                         el: ".message"
                     });
                     return false;
@@ -189,14 +189,14 @@ $(function () {
         }
     }
 
-    var goodstype = {
-        url: "/goodstype",
+    var user = {
+        url: "/user",
         className: "animated",
         render: function () {
             $(".circle").show();
             var def = $.Deferred();
             $._ajax({
-                url: "/admin/goodstype",
+                url: "/admin/user",
                 dataType: "html"
             }).done(function (html) {
                 def.resolve(html);
@@ -212,17 +212,17 @@ $(function () {
             $("#delSelected").click(function (event) {
                 event.preventDefault();
                 $(".circle").show();
-                var ids = [];
+                var usernames = [];
                 $("table input[type=checkbox]:checked").each(function (i, v) {
-                    ids.push(v.value);
+                    usernames.push(v.value);
                 });
                 $._ajax({
-                    url: "/admin/delselectedgoodstype",
+                    url: "/admin/delselecteduser",
                     type: "delete",
-                    data: { ids: ids.join(",") }
+                    data: { usernames: usernames.join(",") }
                 }).done(function (data) {
                     if (data.success) {
-                        router.go("/goodstype");
+                        router.go("/user");
                     } else {
                         $.alt({
                             type: "danger",
@@ -239,16 +239,16 @@ $(function () {
             });
         }
     }
-    var addGoodstypePage = {
-        url: "/addGoodstypePage/:id",
+    var addUserPage = {
+        url: "/adduserpage/:username",
         className: "animated",
         render: function () {
             $(".circle").show();
             var def = $.Deferred();
             $._ajax({
-                url: "/admin/addgoodstypepage",
+                url: "/admin/adduserpage",
                 type: "put",
-                data: { id: this.params.id },
+                data: { username: this.params.username },
                 dataType: "html"
             }).done(function (html) {
                 def.resolve(html);
@@ -260,27 +260,52 @@ $(function () {
             return def.promise();
         },
         bind: function () {
-            $("#addGoodstypeForm").submit(function () {
-                var typename = $("#typename").val(),
-                    pid = $("#pid").val();
-                if (!$.vaildate.isEmpty(typename)) {
+            $("#addUserForm").submit(function () {
+                var username = $("#username").val(),
+                    password = $("#password").val();
+                if (!$.vaildate.isEmpty(username)) {
                     $.alt({
                         type: "warning",
-                        msg: "分类名称不能为空",
-                        el: ".message"
+                        msg: "用户名不能为空",
+                        el: ".usermessage"
                     });
-                    $("#typename").focus();
+                    $("#username").focus();
+                    return false;
+                }
+                if (!$.vaildate.isEmpty(password)) {
+                    $.alt({
+                        type: "warning",
+                        msg: "密码不能为空",
+                        el: ".usermessage"
+                    });
+                    $("#password").focus();
+                    return false;
+                }
+                if (!$.vaildate.isWord(username) || !$.vaildate.isWord(password)) {
+                    $.alt({
+                        type: "warning",
+                        msg: "用户名或密码格式不正确",
+                        el: ".usermessage"
+                    });
+                    $("#password").focus();
                     return false;
                 }
                 $(".circle").show();
-                var data = { id: $("#id").val(), typename: typename, pid: pid };
+                var data = {
+                    username: username,
+                    password: password,
+                    sex: $("input[type='radio']:checked").val(),
+                    birthdate: $("#birthDate").val(),
+                    sign: $("#sign").val(),
+                    isadd: $("#isadd").val()
+                };
                 $._ajax({
-                    url: "/admin/addgoodstype",
+                    url: "/admin/adduser",
                     type: "post",
                     data: data
                 }).done(function (data) {
                     if (data.success) {
-                        router.go("/goodstype");
+                        router.go("/user");
                     } else {
                         $.alt({
                             type: "danger",
@@ -295,18 +320,18 @@ $(function () {
             });
         }
     }
-    var delgoodstype = {
-        url: "/delgoodstype/:id",
+    var deluser = {
+        url: "/deluser/:username",
         render: function () {
             $(".circle").show();
             var def = $.Deferred();
             $._ajax({
-                url: "/admin/delgoodstype",
+                url: "/admin/deluser",
                 type: "delete",
-                data: { id: this.params.id }
+                data: { username: this.params.username }
             }).done(function (data) {
                 if (data.success) {
-                    router.go("/goodstype");
+                    router.go("/user");
                 } else {
                     $.alt({
                         type: "danger",
@@ -324,14 +349,14 @@ $(function () {
         }
     }
 
-    var goods = {
-        url: "/goods",
+    var movie = {
+        url: "/movie",
         className: "animated",
         render: function () {
             $(".circle").show();
             var def = $.Deferred();
             $._ajax({
-                url: "/admin/goods",
+                url: "/admin/movie",
                 dataType: "html"
             }).done(function (html) {
                 def.resolve(html);
@@ -352,12 +377,12 @@ $(function () {
                     ids.push(v.value);
                 });
                 $._ajax({
-                    url: "/admin/delselectedgoods",
+                    url: "/admin/delselectedmovie",
                     type: "delete",
                     data: { ids: ids.join(",") }
                 }).done(function (data) {
                     if (data.success) {
-                        router.go("/goods");
+                        router.go("/movie");
                     } else {
                         $.alt({
                             type: "danger",
@@ -373,14 +398,14 @@ $(function () {
             });
         }
     }
-    var addGoodsPage = {
-        url: "/addGoodsPage/:id",
+    var addMoviePage = {
+        url: "/addmoviepage/:id",
         className: "animated",
         render: function () {
             $(".circle").show();
             var def = $.Deferred();
             $._ajax({
-                url: "/admin/addgoodspage",
+                url: "/admin/addmoviepage",
                 type: "put",
                 data: { id: this.params.id },
                 dataType: "html"
@@ -394,75 +419,92 @@ $(function () {
             return def.promise();
         },
         bind: function () {
-            $("#addGoodsForm").submit(function () {
-                var gname = $("#gname").val(),
-                    price = $("#price").val(),
-                    strock = $("#strock").val(),
-                    file = $("#img").get(0).files[0];
-                if (!$.vaildate.isEmpty(gname)) {
+            $("#addMovieForm").submit(function () {
+                var name = $("#name").val(),
+                    slideimg1 = $("#slideimg1").val(),
+                    slideimg2 = $("#slideimg2").val(),
+                    listimg1 = $("#listimg1").val(),
+                    listimg2 = $("#listimg2").val(),
+                    trailerimg = $("#trailerimg").val()
+                if (!$.vaildate.isEmpty(name)) {
                     $.alt({
                         type: "warning",
-                        msg: "商品名称不能为空",
+                        msg: "名称不能为空",
                         el: ".message"
                     });
-                    $("#gname").focus();
+                    $("#name").focus();
                     return false;
                 }
-                if (!$.vaildate.isEmpty(price) || !$.vaildate.isEmpty(strock)) {
+                if (!$.vaildate.isEmpty(slideimg1)) {
                     $.alt({
                         type: "warning",
-                        msg: "价格/库存不能为空",
+                        msg: "主轮播图路径不能为空",
                         el: ".message"
                     });
-                    $("#price").focus();
+                    $("#slideimg1").focus();
                     return false;
                 }
-                if (!$.vaildate.isNumber(price) || !$.vaildate.isNumber(strock)) {
+                if (!$.vaildate.isEmpty(slideimg2)) {
                     $.alt({
                         type: "warning",
-                        msg: "价格/库存不合法",
+                        msg: "子轮播图路径不能为空",
                         el: ".message"
                     });
-                    $("#gname").focus();
+                    $("#slideimg2").focus();
                     return false;
                 }
-                if (file !== undefined && !$.vaildate.isImage(file.type)) {
+                if (!$.vaildate.isEmpty(listimg1)) {
                     $.alt({
                         type: "warning",
-                        msg: "只能上传图片",
+                        msg: "列表图标路径不能为空",
                         el: ".message"
                     });
+                    $("#listimg1").focus();
                     return false;
                 }
-                if (file !== undefined && !$.vaildate.imageSizeLimit(file.size)) {
+                if (!$.vaildate.isEmpty(listimg2)) {
                     $.alt({
                         type: "warning",
-                        msg: "图片太大",
+                        msg: "大列表图标路径不能为空",
                         el: ".message"
                     });
+                    $("#listimg2").focus();
+                    return false;
+                }
+                if (!$.vaildate.isEmpty(trailerimg)) {
+                    $.alt({
+                        type: "warning",
+                        msg: "预告片图路径不能为空",
+                        el: ".message"
+                    });
+                    $("#trailerimg").focus();
                     return false;
                 }
                 $(".circle").show();
-                var data = new FormData();
-                file = (file === undefined ? null : file);
-                data.append("gname", gname);
-                data.append("price", price);
-                data.append("strock", strock);
-                data.append("img", file);
-                data.append("type", $("#type").val());
-                data.append("info", $("#info").val());
-                data.append("admin", $("#admin").val());
-                data.append("id", $("#id").val());
+                var data = {
+                    id: $("#id").val(),
+                    name: name,
+                    rate: $("#rate").val(),
+                    actor: $("#actor").val(),
+                    director: $("#director").val(),
+                    type: $("#type").val(),
+                    time: $("#time").val(),
+                    long: $("#long").val(),
+                    describe: $("#describe").val(),
+                    slideimg1: slideimg1,
+                    slideimg2: slideimg2,
+                    listimg1: listimg1,
+                    listimg2: listimg2,
+                    trailerimg: trailerimg,
+                    bilisource: $("#bilisource").val()
+                }
                 $._ajax({
-                    url: "/admin/addgoods",
+                    url: "/admin/addmovie",
                     type: "post",
-                    data: data,
-                    cache: false,
-                    processData: false,
-                    contentType: false
+                    data: data
                 }).done(function (data) {
                     if (data.success) {
-                        router.go("/goods");
+                        router.go("/movie");
                     } else {
                         $.alt({
                             type: "danger",
@@ -475,37 +517,20 @@ $(function () {
                 });
                 return false;
             });
-
-            $("#img").change(function () {
-                var fr = new FileReader();
-                var file = $(this).get(0).files[0];
-                if (file === undefined) {
-                    $("#preview").attr("src", "");
-                } else {
-                    fr.readAsDataURL(file);
-                }
-                fr.onload = function () {
-                    if ($.vaildate.isImage(file.type)) {
-                        $("#preview").attr("src", this.result);
-                    } else {
-                        $("#preview").attr("src", "");
-                    }
-                }
-            });
         }
     }
-    var delgoods = {
-        url: "/delgoods/:id",
+    var delmovie = {
+        url: "/delmovie/:id",
         render: function () {
             $(".circle").show();
             var def = $.Deferred();
             $._ajax({
-                url: "/admin/delgoods",
+                url: "/admin/delmovie",
                 type: "delete",
                 data: { id: this.params.id }
             }).done(function (data) {
                 if (data.success) {
-                    router.go("/goods");
+                    router.go("/movie");
                 } else {
                     $.alt({
                         type: "danger",
@@ -572,8 +597,8 @@ $(function () {
             });
         }
     }
-    var addNewsPage = {
-        url: "/addNewsPage/:id",
+    var addnewspage = {
+        url: "/addnewspage/:id",
         className: "animated",
         render: function () {
             $(".circle").show();
@@ -593,24 +618,48 @@ $(function () {
             return def.promise();
         },
         bind: function () {
-            var mditor = new Mditor("#content", {
+            var mditor = new Mditor("#main", {
                 height: 300,
                 fixedHeight: true
             });
             $("#addNewsForm").submit(function () {
                 var title = $("#title").val(),
-                    content = $("#content").val();
+                    main = $("#main").val(),
+                    quotation = $("#quotation").val();
                 if (!$.vaildate.isEmpty(title)) {
                     $.alt({
                         type: "warning",
                         msg: "标题不能为空",
                         el: ".message"
                     });
-                    $("#content").focus();
+                    $("#title").focus();
+                    return false;
+                }
+                if (!$.vaildate.isEmpty(main)) {
+                    $.alt({
+                        type: "warning",
+                        msg: "内容不能为空",
+                        el: ".message"
+                    });
+                    $("#main").focus();
+                    return false;
+                }
+                if (!$.vaildate.isEmpty(quotation)) {
+                    $.alt({
+                        type: "warning",
+                        msg: "引用不能为空",
+                        el: ".message"
+                    });
+                    $("#quotation").focus();
                     return false;
                 }
                 $(".circle").show();
-                var data = {id: $("#id").val(), title: title, content: content }
+                var data = {
+                    id: $("#id").val(),
+                    title: title,
+                    main: main,
+                    quotation: quotation
+                }
                 $._ajax({
                     url: "/admin/addnews",
                     type: "post",
@@ -660,17 +709,321 @@ $(function () {
             return def.promise();
         }
     }
-    var preview = {
-        url: "/preview/:id",
+    var newspreview = {
+        url: "/newspreview/:id",
         render: function () {
             $(".circle").show();
             var def = $.Deferred();
             $._ajax({
-                url: "/admin/preview/" + this.params.id,
+                url: "/admin/newspreview/" + this.params.id,
                 dataType: "html"
             }).done(function (html) {
-                var p = new Parser();
-                def.resolve(p.parse(html));
+                def.resolve(html);
+            }).fail(function (err) {
+                def.reject(err);
+            }).always(function () {
+                $(".circle").hide();
+            });
+
+            return def.promise();
+        }
+    }
+
+    var comment = {
+        url: "/comment",
+        className: "animated",
+        render: function () {
+            $(".circle").show();
+            var def = $.Deferred();
+            $._ajax({
+                url: "/admin/comment",
+                dataType: "html"
+            }).done(function (html) {
+                def.resolve(html);
+            }).fail(function (err) {
+                def.reject(err);
+            }).always(function () {
+                $(".circle").hide();
+            });
+
+            return def.promise();
+        },
+        bind: function () {
+            $("#delSelected").click(function (event) {
+                event.preventDefault();
+                $(".circle").show();
+                var ids = [];
+                $("table input[type=checkbox]:checked").each(function (i, v) {
+                    ids.push(v.value);
+                });
+                $._ajax({
+                    url: "/admin/delselectedcomment",
+                    type: "delete",
+                    data: { ids: ids.join(",") }
+                }).done(function (data) {
+                    if (data.success) {
+                        router.go("/comment");
+                    } else {
+                        $.alt({
+                            type: "danger",
+                            msg: data.message,
+                            el: ".message"
+                        });
+                    }
+                }).fail(function (err) {
+                    def.reject(err);
+                }).always(function () {
+                    $(".circle").hide();
+                });
+            });
+        }
+    }
+    var addcommentpage = {
+        url: "/addcommentpage/:id",
+        className: "animated",
+        render: function () {
+            $(".circle").show();
+            var def = $.Deferred();
+            $._ajax({
+                url: "/admin/addcommentpage",
+                type: "put",
+                data: { id: this.params.id },
+                dataType: "html"
+            }).done(function (html) {
+                def.resolve(html);
+            }).fail(function (err) {
+                def.reject(err);
+            }).always(function () {
+                $(".circle").hide();
+            });
+            return def.promise();
+        },
+        bind: function () {
+            $("#addCommentForm").submit(function () {
+                var main = $("#main").val();
+                if (!$.vaildate.isEmpty(main)) {
+                    $.alt({
+                        type: "warning",
+                        msg: "内容不能为空",
+                        el: ".message"
+                    });
+                    $("#main").focus();
+                    return false;
+                }
+                $(".circle").show();
+                var data = {
+                    id: $("#id").val(),
+                    main: main,
+                }
+                $._ajax({
+                    url: "/admin/addcomment",
+                    type: "post",
+                    data: data
+                }).done(function (data) {
+                    if (data.success) {
+                        router.go("/comment");
+                    } else {
+                        $.alt({
+                            type: "danger",
+                            msg: data.message,
+                            el: ".message"
+                        });
+                    }
+                }).always(function () {
+                    $(".circle").hide();
+                });
+                return false;
+            });
+        }
+    }
+    var delcomment = {
+        url: "/delcomment/:id",
+        render: function () {
+            $(".circle").show();
+            var def = $.Deferred();
+            $._ajax({
+                url: "/admin/delcomment",
+                type: "delete",
+                data: { id: this.params.id }
+            }).done(function (data) {
+                if (data.success) {
+                    router.go("/comment");
+                } else {
+                    $.alt({
+                        type: "danger",
+                        msg: data.message,
+                        el: ".message"
+                    });
+                }
+            }).fail(function (err) {
+                def.reject(err);
+            }).always(function () {
+                $(".circle").hide();
+            });
+
+            return def.promise();
+        }
+    }
+    var article = {
+        url: "/article",
+        className: "animated",
+        render: function () {
+            $(".circle").show();
+            var def = $.Deferred();
+            $._ajax({
+                url: "/admin/article",
+                dataType: "html"
+            }).done(function (html) {
+                def.resolve(html);
+            }).fail(function (err) {
+                def.reject(err);
+            }).always(function () {
+                $(".circle").hide();
+            });
+
+            return def.promise();
+        },
+        bind: function () {
+            $("#delSelected").click(function (event) {
+                event.preventDefault();
+                $(".circle").show();
+                var ids = [];
+                $("table input[type=checkbox]:checked").each(function (i, v) {
+                    ids.push(v.value);
+                });
+                $._ajax({
+                    url: "/admin/delselectedarticle",
+                    type: "delete",
+                    data: { ids: ids.join(",") }
+                }).done(function (data) {
+                    if (data.success) {
+                        router.go("/article");
+                    } else {
+                        $.alt({
+                            type: "danger",
+                            msg: data.message,
+                            el: ".message"
+                        });
+                    }
+                }).fail(function (err) {
+                    def.reject(err);
+                }).always(function () {
+                    $(".circle").hide();
+                });
+            });
+        }
+    }
+    var addarticlepage = {
+        url: "/addarticlepage/:id",
+        className: "animated",
+        render: function () {
+            $(".circle").show();
+            var def = $.Deferred();
+            $._ajax({
+                url: "/admin/addarticlepage",
+                type: "put",
+                data: { id: this.params.id },
+                dataType: "html"
+            }).done(function (html) {
+                def.resolve(html);
+            }).fail(function (err) {
+                def.reject(err);
+            }).always(function () {
+                $(".circle").hide();
+            });
+            return def.promise();
+        },
+        bind: function () {
+            var mditor = new Mditor("#main", {
+                height: 300,
+                fixedHeight: true
+            });
+            $("#addArticleForm").submit(function () {
+                var title = $("#title").val(),
+                    main = $("#main").val();
+                if (!$.vaildate.isEmpty(title)) {
+                    $.alt({
+                        type: "warning",
+                        msg: "标题不能为空",
+                        el: ".message"
+                    });
+                    $("#title").focus();
+                    return false;
+                }
+                if (!$.vaildate.isEmpty(main)) {
+                    $.alt({
+                        type: "warning",
+                        msg: "内容不能为空",
+                        el: ".message"
+                    });
+                    $("#main").focus();
+                    return false;
+                }
+                $(".circle").show();
+                var data = {
+                    id: $("#id").val(),
+                    title: title,
+                    main: main
+                }
+                $._ajax({
+                    url: "/admin/addarticle",
+                    type: "post",
+                    data: data
+                }).done(function (data) {
+                    if (data.success) {
+                        router.go("/article");
+                    } else {
+                        $.alt({
+                            type: "danger",
+                            msg: data.message,
+                            el: ".message"
+                        });
+                    }
+                }).always(function () {
+                    $(".circle").hide();
+                });
+                return false;
+            });
+        }
+    }
+    var delarticle = {
+        url: "/delarticle/:id",
+        render: function () {
+            $(".circle").show();
+            var def = $.Deferred();
+            $._ajax({
+                url: "/admin/delarticle",
+                type: "delete",
+                data: { id: this.params.id }
+            }).done(function (data) {
+                if (data.success) {
+                    router.go("/article");
+                } else {
+                    $.alt({
+                        type: "danger",
+                        msg: data.message,
+                        el: ".message"
+                    });
+                }
+            }).fail(function (err) {
+                def.reject(err);
+            }).always(function () {
+                $(".circle").hide();
+            });
+
+            return def.promise();
+        }
+    }
+    var articlepreview = {
+        url: "/articlepreview/:id",
+        render: function () {
+            $(".circle").show();
+            var def = $.Deferred();
+            $._ajax({
+                url: "/admin/articlepreview/" + this.params.id,
+                dataType: "html"
+            }).done(function (html) {
+                def.resolve(html);
             }).fail(function (err) {
                 def.reject(err);
             }).always(function () {
@@ -682,8 +1035,10 @@ $(function () {
     }
     router.push(home).push(logout)
         .push(admin).push(addAdminPage).push(delAdmin)
-        .push(goodstype).push(addGoodstypePage).push(delgoodstype)
-        .push(goods).push(addGoodsPage).push(delgoods)
-        .push(news).push(addNewsPage).push(delnews).push(preview)
+        .push(user).push(addUserPage).push(deluser)
+        .push(movie).push(addMoviePage).push(delmovie)
+        .push(news).push(addarticlepage).push(delnews).push(newspreview)
+        .push(comment).push(addcommentpage).push(delcomment)
+        .push(article).push(delarticle).push(articlepreview)
         .setDefault("/").init();
 });
