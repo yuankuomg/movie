@@ -11,6 +11,7 @@
 	<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/message.js" type="text/javascript" charset="utf-8"></script>
 	<script type="text/javascript">
@@ -26,7 +27,6 @@
 			if(loginData){
 				$("#username").val(loginData.username);
 				$("#password").val(loginData.password);
-				$("#rememberMe").attr("checked", "checked");
 			}
       		$("#loginForm").submit(function(){
 			uname = $("#username").val();
@@ -70,11 +70,7 @@
 					msg: "登录成功",
 					el: ".message"
 				});
-				if($("#rememberMe").is(":checked")){
-					sessionStorage.setItem("login", JSON.stringify(data));
-				}else{
-					sessionStorage.removeItem("login");
-				}
+				sessionStorage.setItem("login", JSON.stringify(data));
 				window.location = "/info.html";
 				}else{
 				$.alt({
@@ -119,7 +115,7 @@
 			<li><a href="trailer.html"><i class="glyphicon glyphicon-film"></i></a></li>
 			<li><a href="list.html"><i class="glyphicon glyphicon-th-list"></i></a></li>
 			<li><a href="news.html"><i class="glyphicon glyphicon-list-alt"></i></a></li>
-			<li class="active"><a href="info.html"><i class="glyphicon glyphicon-user"></i></a></li>
+			<li><a href="info.html"><i class="glyphicon glyphicon-user"></i></a></li>
 			<li><a href="" data-toggle="modal" data-target="#searchModal"><i class="glyphicon glyphicon-search"></i></a></li>
 		</ul>
 	</nav>
@@ -145,14 +141,14 @@
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<span class="navbar-brand">Movie Info</span>
+					<a href="/info.html" class="navbar-text" id="user"></a><a href='/user/logout' class='navbar-text' id='logout' style="display:none;">登出</a>
 				</div>
-
-				<form class="navbar-form navbar-right" role="search">
+				<form class="navbar-form navbar-right" role="search" action="/searchresult.html" id="searchForm">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
+						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
 						<span class="input-group-btn">
-        						<button class="btn btn-default" type="submit">Go!</button>
-      						</span>
+							<button class="btn btn-default" type="submit">Go!</button>
+						</span>
 					</div>
 				</form>
 			</div>
@@ -162,22 +158,18 @@
 			<div class="form-group">
 				<label for="username" class="col-xs-12 col-sm-2 control-label">用户名：</label>
 				<div class="col-xs-12 col-sm-10">
-					<input type="text" class="form-control" id="username" placeholder="用户名" />
+					<input type="text" value="comegogo3" class="form-control" id="username" placeholder="用户名" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="password" class="col-xs-12 col-sm-2 control-label">密码：</label>
 				<div class="col-xs-12 col-sm-10">
-					<input type="password" class="form-control" id="password" placeholder="密码"/>
+					<input type="password" value="nmdtmd" class="form-control" id="password" placeholder="密码" />
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-12 col-sm-10 col-sm-offset-2">
-					<div class="checkbox">
-						<label>
-     			 			<input type="checkbox" id="rememberMe">记住我
-    					</label>
-					</div>
+				<div class="col-xs-12 text-right">
+					<a href="/reg.html">点此注册&rarr;</a>
 				</div>
 			</div>
 			<div class="form-group">

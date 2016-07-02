@@ -1,198 +1,152 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>电影一览</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/common.css" />
-		<link rel="stylesheet" type="text/css" href="css/modal.css"/>
-		<link rel="stylesheet" type="text/css" href="css/list.css" />
-		<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
-			<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>电影一览</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/modal.css" />
+	<link rel="stylesheet" type="text/css" href="css/list.css" />
+	<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/message.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/list.js" type="text/javascript" charset="utf-8"></script>
+</head>
 
-	</head>
-
-	<body>
-		<nav class="sidebar">
-			<ul class="nav nav-pills nav-stacked">
-				<li><a href="/index.html"><i class="glyphicon glyphicon-home"></i></a></li>
-				<li><a href="/trailer.html"><i class="glyphicon glyphicon-film"></i></a></li>
-				<li><a href="/list.html"><i class="glyphicon glyphicon-th-list"></i></a></li>
-				<li><a href="/news.html"><i class="glyphicon glyphicon-list-alt"></i></a></li>
-				<li><a href="/info.html"><i class="glyphicon glyphicon-user"></i></a></li>
-				<li><a href="" data-toggle="modal" data-target="#searchModal"><i class="glyphicon glyphicon-search"></i></a></li>
-			</ul>
-		</nav>
-		<!--模态框开始-->
-		<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<div class="modal-body">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search for...">
-							<span class="input-group-btn">
+<body>
+	<nav class="sidebar">
+		<ul class="nav nav-pills nav-stacked">
+			<li><a href="/index.html"><i class="glyphicon glyphicon-home"></i></a></li>
+			<li><a href="/trailer.html"><i class="glyphicon glyphicon-film"></i></a></li>
+			<li><a href="/list.html"><i class="glyphicon glyphicon-th-list"></i></a></li>
+			<li><a href="/news.html"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+			<li><a href="/info.html"><i class="glyphicon glyphicon-user"></i></a></li>
+			<li><a href="" data-toggle="modal" data-target="#searchModal"><i class="glyphicon glyphicon-search"></i></a></li>
+		</ul>
+	</nav>
+	<!--模态框开始-->
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
         						<button class="btn btn-default" type="submit">Go!</button>
       						</span>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!--模态框结束-->
-		<div class="main">
-			<nav class="navbar navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<span class="navbar-brand">Movie Info</span>
-					</div>
-					<form class="navbar-form navbar-right" role="search">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search for...">
-							<span class="input-group-btn">
-        						<button class="btn btn-default" type="submit">Go!</button>
-      						</span>
-						</div>
-					</form>
+	</div>
+	<!--模态框结束-->
+	<div class="main">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<span class="navbar-brand">Movie Info</span>
+					<a href="/info.html" class="navbar-text" id="user"></a><a href='/user/logout' class='navbar-text' id='logout' style="display:none;">登出</a>
 				</div>
-			</nav>
-			<div class="row list-content">
+				<form class="navbar-form navbar-right" role="search" action="/searchresult.html" id="searchForm">
+					<div class="input-group">
+						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Go!</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</nav>
+		<div class="row list-content">
+			<div class="col-xs-12 col-md-9">
 				<h2 class="movie-pre-title">电影一览</h2>
-				<div class="col-xs-12 col-md-9">
-					<%listMovies.map(function(listMovie){%>
-						<div class="thumbnail row">
-							<div class="col-xs-12 col-sm-4 post-pic">
-								<a href="" class="thumbnail-pic">
+				<%listMovies.map(function(listMovie){%>
+					<div class="thumbnail row">
+						<div class="col-xs-12 col-sm-4 post-pic">
+							<a href="/detail-movie/<%=listMovie.id%>" class="thumbnail-pic">
 									<img src="img/<%=listMovie.listimg2%>" class="thumb-pic1">
 									<img src="img/<%=listMovie.slideimg1%>" class="thumb-pic2">
 								</a>
-							</div>
-							<div class="col-xs-12 col-sm-8 movie-des">
-								<div class="caption">
-									<h3><%=listMovie.name%></h3>
-									<hr />
-									<p>上映日期：<%=listMovie.time%></p>
-									<p>平均评分：
-										<%for(var i = 0,j = listMovie.rate; i < 5; i++, j--){%>
-											<%if(j > 0){%>
-												<a href=""><i class="glyphicon glyphicon-star"></i></a>
-											<%}else{%>
-												<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-											<%}%>
-										<%}%>
-									</p>
-									<p>你的评分：
-										<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-										<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-										<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-										<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-										<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									</p>
-									<p>演员：<%=listMovie.actor%></p>
-									<p>导演：<%=listMovie.director%></p>
-									<p>分类：<%=listMovie.type%></p>
-									<p>时长：<%=listMovie.long%></p>
-									<a href="http://www.bilibili.com/video/<%=listMovie.bilisource%>/" target="_blank" class="btn btn-primary btn-watch-trailer">
-								<i class="glyphicon glyphicon-film"></i>&nbsp;预告片</a>
-								</div>
+						</div>
+						<div class="col-xs-12 col-sm-8 movie-des">
+							<div class="caption">
+								<h3>
+									<a href="/detail-movie/<%=listMovie.id%>">
+										<%=listMovie.name%>
+									</a>
+								</h3>
+								<hr />
+								<p>上映日期：
+									<%=listMovie.time%>
+								</p>
+								<p>平均评分：
+									<%=listMovie.rate%>&nbsp;/&nbsp;5
+								</p>
+								<p>你的评分：
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+								</p>
+								<p>演员：
+									<%=listMovie.actor%>
+								</p>
+								<p>导演：
+									<%=listMovie.director%>
+								</p>
+								<p>分类：
+									<%=listMovie.type%>
+								</p>
+								<p>时长：
+									<%=listMovie.long%>
+								</p>
+								<a href="http://www.bilibili.com/video/<%=listMovie.bilisource%>/" target="_blank" class="btn btn-primary btn-watch-trailer">
+									<i class="glyphicon glyphicon-film"></i>&nbsp;预告片</a>
 							</div>
 						</div>
+					</div>
 					<%})%>
-				</div>
-				<div class="col-xs-12 col-md-3">
-					<ul class="list-group may-like">
-						<li class="list-group-item may-like-title">
-							<h3>你可能会喜欢</h3>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-1.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">美国队长3：内战</h4>
-								<p>上映日期：xxxx-xx-xx</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-2.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">疯狂动物城</h4>
-								<p>上映日期：xxxx-xx-xx</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-3.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">星际穿越</h4>
-								<p>上映日期：xxxx-xx-xx</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-4.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">超人大战蝙蝠侠</h4>
-								<p>上映日期：xxxx-xx-xx</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-5.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">复仇者联盟2：奥创纪元</h4>
-								<p>上映日期：xxxx-xx-xx</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-6.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">敢死队3</h4>
-								<p>上映日期：xxxx-xx-xx</p>
-							</div>
-						</li>
-					</ul>
-					<ul class="list-group article-list">
-						<li class="list-group-item article-list-title">
-							文章
-						</li>
-						<li class="list-group-item">
-							<a href="">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a>
-						</li>
-						<li class="list-group-item">
-							<a href="">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a>
-						</li>
-						<li class="list-group-item">
-							<a href="">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a>
-						</li>
-						<li class="list-group-item">
-							<a href="">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a>
-						</li>
-						<li class="list-group-item">
-							<a href="">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</a>
-						</li>
-					</ul>
+			</div>
+			<div class="col-xs-12 col-md-3">
+				<ul class="list-group may-like">
+					<li class="list-group-item may-like-title">
+						<h3>最新电影</h3>
+					</li>
+				</ul>
+				<ul class="list-group article-list">
+					<li class="list-group-item article-list-title">
+						文章
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer-header">
+				<div class="skew">
+
 				</div>
 			</div>
-			<div class="footer">
-				<div class="footer-header">
-					<div class="skew">
-
-					</div>
+			<div class="row footer-body">
+				<div class="col-xs-12 col-sm-4 website-des">
+					<p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
 				</div>
-				<div class="row footer-body">
-					<div class="col-xs-12 col-sm-4 website-des">
-						<p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-						<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
-					</div>
-					<div class="col-xs-12 col-sm-4 col-sm-offset-2 contact">
-						<h4>联系我们</h4>
-						<address>
-  							<strong>地址：</strong>加悦大厦&nbsp;&nbsp;龙口大厦<br>
-  							<strong>电话：</strong>(123) 456-7890
-						</address>
-					</div>
+				<div class="col-xs-12 col-sm-4 col-sm-offset-2 contact">
+					<h4>联系我们</h4>
+					<address>
+						<strong>地址：</strong>加悦大厦&nbsp;&nbsp;龙口大厦<br>
+						<strong>电话：</strong>(123) 456-7890
+					</address>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
 
 </html>

@@ -16,6 +16,7 @@
 	<script src="/js/slick.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/message.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/index.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
@@ -52,16 +53,16 @@
 			<div class="container-fluid">
 				<div class="navbar-header">
 					<span class="navbar-brand">Movie Info</span>
+					<a href="/info.html" class="navbar-text" id="user"></a><a href='/user/logout' class='navbar-text' id='logout' style="display:none;">登出</a>
 				</div>
-				<form class="navbar-form navbar-right" role="search">
+				<form class="navbar-form navbar-right" role="search" action="/searchresult.html" id="searchForm">
 					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search for...">
+						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
 						<span class="input-group-btn">
-        						<button class="btn btn-default" type="submit">Go!</button>
-      						</span>
+							<button class="btn btn-default" type="submit">Go!</button>
+						</span>
 					</div>
 				</form>
-
 			</div>
 		</nav>
 		<div id="indexSlide">
@@ -70,25 +71,13 @@
 					<img src="img/<%=slideMovie.slideimg1%>" />
 					<div class="slide-des">
 						<h2>
-							<a href="">
+							<a href="/detail-movie/<%=slideMovie.id%>">
 								<%=slideMovie.name%>
 							</a>
 						</h2>
-						<p class="movie-des">上映日期：
-							<%=slideMovie.time%>
-						</p>
-						<p class="movie-des">评分：
-							<%for(var i = 0,j = slideMovie.rate; i < 5; i++, j--){%>
-								<%if(j > 0){%>
-									<a href=""><i class="glyphicon glyphicon-star"></i></a>
-									<%}else{%>
-										<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-										<%}%>
-											<%}%>
-						</p>
-						<p class="movie-des">主演：
-							<%=slideMovie.actor%>
-						</p>
+						<p class="movie-des">上映日期：<%=slideMovie.time%></p>
+						<p class="movie-des">评分：<%=slideMovie.rate%>&nbsp;/&nbsp;5</p>
+						<p class="movie-des">主演：<%=slideMovie.actor%></p>
 						<p class="movie-des">
 							<%=slideMovie.describe%>
 						</p>
@@ -99,14 +88,7 @@
 						<p class="col-xs-6 text-center">上映日期：
 							<%=slideMovie.time%>
 						</p>
-						<p class="col-xs-6 text-center">评分：
-							<%for(var i = 0,j = slideMovie.rate; i < 5; i++, j--){%>
-								<%if(j > 0){%>
-									<a href=""><i class="glyphicon glyphicon-star"></i></a>
-									<%}else{%>
-										<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-										<%}%>
-											<%}%>
+						<p class="col-xs-6 text-center">评分：<%=slideMovie.rate%>&nbsp;/&nbsp;5
 						</p>
 					</div>
 				</div>

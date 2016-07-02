@@ -49,8 +49,14 @@ body {
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 999;
 }
-.main .navbar .navbar-brand {
+.main .navbar .navbar-brand,
+.main .navbar .navbar-text {
   color: rgba(255, 255, 255, 0.8);
+}
+.main .navbar .navbar-text {
+  margin: 0;
+  padding: 15px;
+  float: left;
 }
 .main .navbar .input-group {
   opacity: 0.8;
@@ -98,11 +104,17 @@ body {
 .main .footer .footer-body .contact address > * {
   padding: 10px 5px;
 }
+@media (max-width: 375px) {
+  .navbar-text {
+    display: none;
+  }
+}
 @media (max-width: 767px) {
-  .navbar {
+  .main .navbar {
     min-height: 0;
   }
-  .navbar-brand {
+  .main .navbar .navbar-brand,
+  .main .navbar .navbar-text {
     height: auto;
     padding-top: 5px;
     padding-bottom: 5px;
@@ -125,26 +137,26 @@ body {
   }
 }
 @media (max-width: 425px) {
-  .thumbnail a .thumb-pic1 {
+  .thumbnail .thumbnail-pic .thumb-pic1 {
     display: block;
   }
-  .thumbnail a .thumb-pic2 {
+  .thumbnail .thumbnail-pic .thumb-pic2 {
     display: none;
   }
 }
 @media (min-width: 426px) and (max-width: 765px) {
-  .thumbnail a .thumb-pic1 {
+  .thumbnail .thumbnail-pic .thumb-pic1 {
     display: none;
   }
-  .thumbnail a .thumb-pic2 {
+  .thumbnail .thumbnail-pic .thumb-pic2 {
     display: block;
   }
 }
 @media (min-width: 768px) {
-  .thumbnail a .thumb-pic1 {
+  .thumbnail .thumbnail-pic .thumb-pic1 {
     display: block;
   }
-  .thumbnail a .thumb-pic2 {
+  .thumbnail .thumbnail-pic .thumb-pic2 {
     display: none;
   }
 }

@@ -2,7 +2,7 @@
   "name": "movie",
   "version": "1.0.0",
   "description": "电影资讯网站毕业项目",
-  "main": "index.js",
+  "main": "movie.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

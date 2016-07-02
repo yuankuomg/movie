@@ -5,13 +5,14 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>电影一览</title>
-	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="css/common.css" />
-	<link rel="stylesheet" type="text/css" href="css/modal.css" />
-	<link rel="stylesheet" type="text/css" href="css/news.css" />
-	<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="/css/modal.css" />
+	<link rel="stylesheet" type="text/css" href="/css/detail-news.css" />
+
+	<script src="/js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
 	<script src="/js/message.js" type="text/javascript" charset="utf-8"></script>
@@ -64,29 +65,22 @@
 		<!--模态框结束-->
 		<div class="row list-content">
 			<div class="col-xs-12 col-md-9">
-				<h2 class="list-content-title">新闻一览</h2>
-				<ul class="list-group news-list well">
-					<%news.map(function(n){%>
-						<a href="/detail-new/<%=n.id%>" class="list-group-item">
-							<%=n.title%><span class="badge"><%=n.date%></span></a>
-						<%})%>
-				</ul>
-				<h2 class="list-content-title">影评一览</h2>
-				<ul class="list-group news-list well">
-					<%articles.map(function(article){%>
-						<a href="/detail-article/<%=article.id%>" class="list-group-item">
-							<%=article.title%><br/>
-								<%=article.username%>&nbsp;评&nbsp;
-									<%=article.name%>
-										<span class="badge"><%=article.date%></span>
-						</a>
-						<%})%>
-				</ul>
+				<h2 class="new-title text-center">
+					<%=detail_article.title%>
+				</h2>
+				<p class="text-center">
+					<%=detail_article.username%>&nbsp;评&nbsp;
+						<%=detail_article.name%>&nbsp;
+							<%=detail_article.date%>
+				</p>
+				<p class="new-content">
+					<%-detail_article.main%>
+				</p>
 			</div>
 			<div class="col-xs-12 col-md-3">
 				<ul class="list-group may-like">
 					<li class="list-group-item may-like-title">
-						<h3>最新电影</h3>
+						<h3>你可能会喜欢</h3>
 					</li>
 				</ul>
 				<ul class="list-group article-list">
@@ -99,7 +93,6 @@
 		<div class="footer">
 			<div class="footer-header">
 				<div class="skew">
-
 				</div>
 			</div>
 			<div class="row footer-body">

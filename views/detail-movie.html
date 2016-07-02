@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>影片详情</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="/css/movie_detail.css" />
+	<script src="/js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="/js/movie-detail.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/message.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/comment.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/list.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+			var loginData = JSON.parse(sessionStorage.getItem("login"));
+			if(!loginData){
+				$("#commentBtn").hide();
+			}else{
+				$("#commentBtn").show();
+			}
+			$("#commentForm").submit(function(){
+				var main = $("#main").val();
+				if(!$.vaildate.isEmpty(main)){
+					$("#main").popover({
+						placement: "top",
+						trigger: "focus",
+						content: "内容不能为空"
+					}).popover('show').focus();
+					return false;
+				}
+				var data = {
+					mid: $("#movieId").attr("mid"),
+					username: loginData.username,
+					main: main
+				};
+				$._ajax({
+					url: "/user/comment",
+					type: "post",
+					data: data,
+					dataType: "json"
+				}).done(function(resData){
+					$._ajax({
+						url: "/comment/" + $("#movieId").attr("mid"),
+						dataType: "json"
+					}).done(function (data) {
+						$("#commentList").children().remove();
+						$("#commentList").append(data.html);
+						$("#commentCount").text("共" + data.count + "条");
+					}).fail(function (err) {
+						$("#commentList").children().remove();
+						$("#commentList").append("<h2>opps！加载没成功</h2>");
+					});
+				}).always(function(){
+					$("#commentModal").modal("hide");
+					$("#main").val("");
+				});
+				return false;
+			});
+		});
+	</script>
+</head>
+
+<body>
+	<nav class="sidebar">
+		<ul class="nav nav-pills nav-stacked">
+			<li><a href="/index.html"><i class="glyphicon glyphicon-home"></i></a></li>
+			<li><a href="/trailer.html"><i class="glyphicon glyphicon-film"></i></a></li>
+			<li><a href="/list.html"><i class="glyphicon glyphicon-th-list"></i></a></li>
+			<li><a href="/news.html"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+			<li><a href="/info.html"><i class="glyphicon glyphicon-user"></i></a></li>
+			<li><a href="" data-toggle="modal" data-target="#searchModal"><i class="glyphicon glyphicon-search"></i></a></li>
+		</ul>
+	</nav>
+	<!--模态框开始-->
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-body">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
+        						<button class="btn btn-default" type="submit">Go!</button>
+      						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框结束-->
+	<!--模态框开始-->
+	<div class="modal fade" id="commentModal" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title">输入你的评论</h4>
+				</div>
+				<div class="modal-body">
+					<form id="commentForm">
+						<div class="form-group">
+							<textarea class="form-control" id="main"></textarea>
+						</div>
+						<div class="form-group text-right">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							<button type="submit" class="btn btn-primary">发表评论</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--模态框结束-->
+	<div class="main">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<span class="navbar-brand">Movie Info</span>
+					<a href="/info.html" class="navbar-text" id="user"></a><a href='/user/logout' class='navbar-text' id='logout' style="display:none;">登出</a>
+				</div>
+				<form class="navbar-form navbar-right" role="search" action="/searchresult.html" id="searchForm">
+					<div class="input-group">
+						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Go!</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</nav>
+		<div class="row movie-content">
+			<div class="col-xs-12 col-md-9">
+				<div class="thumbnail row">
+					<div class="col-xs-12 col-sm-4 thumbnail-pic">
+						<img src="/img/<%=detail_movie.listimg2%>" class="thumb-pic1">
+						<img src="/img/<%=detail_movie.slideimg1%>" class="thumb-pic2">
+					</div>
+					<div class="col-xs-12 col-sm-8 movie-des">
+						<div class="caption">
+							<h3 class="movie-name" id="movieId" mid='<%=detail_movie.id%>'>
+								<%=detail_movie.name%>
+							</h3>
+							<hr />
+							<p>上映日期：
+								<%=detail_movie.time%>
+							</p>
+							<p>平均评分：
+								<%=detail_movie.rate%>&nbsp;/&nbsp;5
+							</p>
+							<p>你的评分：
+								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+								<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
+							</p>
+							<p>演员：
+								<%=detail_movie.actor%>
+							</p>
+							<p>导演：
+								<%=detail_movie.director%>
+							</p>
+							<p>分类：
+								<%=detail_movie.type%>
+							</p>
+							<p>时长：
+								<%=detail_movie.long%>
+							</p>
+							<a href="http://www.bilibili.com/video/<%=detail_movie.bilisource%>/" target="_blank" class="btn btn-primary btn-watch-trailer">
+								<i class="glyphicon glyphicon-film"></i>&nbsp;预告片</a>
+						</div>
+					</div>
+				</div>
+				<div class="story">
+					<h3 class="story-title">剧情简介</h3>
+					<hr/>
+					<p class="story-des">
+						<%=detail_movie.describe%>
+					</p>
+				</div>
+
+				<!--短评-->
+				<div class="movie-comment">
+					<h3 class="movie-comment-title">评论
+						<span id="commentCount"></span>
+					</h3>
+					<button class="btn btn-primary btn-comment" id="commentBtn" data-toggle="modal" data-target="#commentModal">我来说两句</button>
+					<hr/>
+					<ul class="list-group comment-list" id="commentList">
+					</ul>
+				</div>
+
+				<!--影评-->
+				<div class="movie-comment">
+					<h3 class="movie-comment-title">影评&nbsp;<span id="articleCount"></span></h3>
+					<a href="/news.html" class="btn btn-primary btn-comment">更多影评</a>
+
+					<hr/>
+					<ul class="list-group comment-list" id="articleList">
+					</ul>
+				</div>
+			</div>
+			<div class="col-xs-12 col-md-3">
+				<ul class="list-group may-like">
+					<li class="list-group-item may-like-title">
+						<h3>最新电影</h3>
+					</li>
+				</ul>
+				<ul class="list-group article-list">
+					<li class="list-group-item article-list-title">
+						文章
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</div>
+
+</body>
+
+</html>

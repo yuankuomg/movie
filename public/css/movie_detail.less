@@ -1,387 +1,89 @@
-@movie-detail-title-head-color :#5D9802;
-
-.movie-detail-title-h5
-{
-    font-size: 20px;
-    color: @movie-detail-title-head-color;
-    display: inline-block;
+@import 'common-var.less';
+@import 'list.less';
+.thumb-pic2 {
+	width: 100%;
 }
-.movie-detail-btn-right
-{
-    position: absolute;
-    top: 10px;
-    right: 0px;
-    border: none;
-    font-size: 14px;
-    border-radius: 5px;
-    padding: 3px 5px;
-    color: blue;
-    background-color: paleturquoise;
-    &:hover
-    {
-        background-color: deeppink;
-        color: white;
-    }
+hr {
+	width: 100%;
+	border-top: 3px solid @black;
+	margin: 5px 0 5px;
 }
-.movie-detail-main
-{
-    margin-top: 50px;
-   
+.movie-content {
+	padding-left: 20px;
+	margin-top: 30px;
 }
-//顶部的图片和详情介绍
-.movie-detail-top
-{
-        img
-        {
-            display: inline-block;
-        }
-        .movie-detail-detail
-        {
-            display: inline-block;
-            padding-left: 20px;
-            vertical-align: middle;
-            label
-            {
-                color: gray;
-                font-size: 16px;
-                margin-right: 10px;
-            }
-            .movie-type
-            {
-                font-size: 10px;
-            }
-            .movie-detail-span
-            {
-                padding: 4px;
-            }
-        }
+.caption hr {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	border: 0;
+	border-top: 1px solid #eee;
 }
-//中间的可操作栏
-.movie-detail-operate
-{
-    .row1
-    {
-       margin-top: 20px;
-        input
-        {
-            padding: 6px;
-            background-color: #D1C8F5;
-            border-radius: 6px;
-            margin: 4px;
-            &:hover
-            {
-                background-color: purple;
-                color: white;
-            }
-        }
-        .movie-detail-evaluate
-        {
-            display: inline-block;
-            label
-            {
-                font-size: 16px;
-                margin-left: 10px;
-            }
-        }
-    }
-    .row2
-    {
-
-        padding-left: 10px;
-        
-        a
-        {
-            padding: 10px;
-            display: inline-block;
-            color: #37379E;
-            font-size: 14px;
-            font-weight: bold;
-            line-height: 25px;
-            margin-bottom: 0;
-            &:hover
-            {
-                color: orange;
-                cursor: pointer;
-                
-            }
-        }    
-        span
-        {
-            vertical-align: middle;
-            line-height: 25px;
-        }
-        .dropdown-toggle
-        {
-            border: 0;
-            color: #37379E;
-            padding-top: 0;
-           
-        }
-        .dropdown-menu
-        {
-            min-width: 100px;
-             img
-            {
-                width: 20px;
-            }
-            a
-            {
-                padding: 5px;
-            }
-            li
-            {
-                
-            }
-        }
-    }
-    
+.movie-name {
+	margin: 10px 0 20px;
 }
-
-
-.movie-detail-synopsis
-{
-    h5
-    {
-        .movie-detail-title-h5;   
-    }
-    p
-    {
-        text-indent: 2em;
-        font-size: 14px;
-        line-height: 26px;
-    }
+.story {
+	.story-title {
+		margin: 20px 0 5px;
+	}
+	.story-des {
+		text-indent: 2em;
+	}
 }
-.movie-detail-pic
-{
-    h5
-    {
-        .movie-detail-title-h5;
-    }
-    span:nth-child(3)
-    {
-        color: #3737E4;
-        font-size: 14px;
-        padding: 6px;
-        margin-left: 20px;
-    }
-    span:nth-child(4)
-    {
-        color: darkgray;
-    }
-    .movie-detail-span
-    {
-        padding: 8px;
-    }
-    >a
-    {
-        color: #3737E4;
-    }
-    .row
-    {
-        img
-        {
-            
-        }
-    }
+.movie-comment {
+	.movie-comment-title {
+		display: inline-block;
+		span {
+			font-size: 14px;
+		}
+	}
+	.comment-list .list-group-item {
+		border: none;
+		border-bottom: 1px solid #ddd;
+		margin: 0;
+		&:last-child{
+			border: none;
+		}
+	}
+	.btn-comment{
+		float: right;
+		margin-top: 20px;
+	}
 }
-//喜欢这部电影的人也喜欢
-.movie-detail-also-like
-{
-    h5
-    {
-        .movie-detail-title-h5;
-    }
-    .caption
-    {
-        text-align: center;
-    }
+.may-like {
+	border-top: 3px solid black;
+	.list-group-item {
+		overflow: hidden;
+		h3 {
+			margin: 10px 0;
+		}
+		img {
+			margin-right: 3px;
+			float: left;
+		}
+		.item-des {
+			width: 70%;
+			float: left;
+			.item-title {
+				overflow: hidden;
+				white-space: nowrap;
+				text-overflow: ellipsis;
+			}
+			p {
+				margin: 0;
+			}
+		}
+	}
+	.may-like-title {
+		border-bottom: none;
+	}
 }
-//短评
-.movie-detail-short-comment
-{
-    position: relative;
-    h5
-    {
-        .movie-detail-title-h5;
-    }
-    .short-comment-name
-    {
-        font-size: 16px;
-    }
-    .cmovie-detail-comment-evaluate
-    {
-        margin: 0px 10px;
-    }
-    .comment-total
-    {
-        color: #04789E;
-        font-size: 13px;
-        &:after{content: ")";}
-        &:before{content: "(";}
-    }
-    >input
-    {
-       .movie-detail-btn-right;
-    }
-    .glyphicon-star
-    {
-        color: orange;
-    }
-    .cmovie-detail-comment-evaluate
-    {
-        display: inline-block;
-    }
-    p
-    {
-        margin-top: 10px;
-        font-size: 12px;
-    }
-}
-
-
-//问题
-.movie-detail-question
-{
-    position: relative;
-    h5
-    {
-        .movie-detail-title-h5;
-    }
-    .question-total
-    {
-        color: #04789E;
-        font-size: 13px;
-        &:after{content: ")";}
-        &:before{content: "(";}
-    }
-    >input
-    {
-        .movie-detail-btn-right;
-    }
-    .list-group
-    {
-        margin-bottom: 10px;
-    }
-    .list-group-item
-    {
-        border: none;
-        border-bottom: 2px dashed lightslategray;
-        >a
-        {
-            font-size: 16px;
-            &:hover
-            {
-                background-color: deepskyblue;
-                color: black;
-            }
-        }
-        span
-        {
-            font-size: 14px;
-            color: #148DB5;
-        }
-    }
-    >a
-    {
-        margin-left:10px;
-        font-size:16px;
-        &:before
-        {
-            content: ">";
-        }
-        &:hover
-        {
-            background-color: darkslateblue;
-            color: white;
-        }
-    }
-}
-
-
-//影评
-.movie-detail-reviews
-{
-    margin-top: 20px;
-    position: relative;
-    h5
-    {
-        .movie-detail-title-h5;
-    }
-    .reviews-total
-    {
-        color: #04789E;
-        font-size: 13px;
-        &:after{content: ")";}
-        &:before{content: "(";}
-    }
-    >input
-    {
-        .movie-detail-btn-right;
-    }
-    .list-group-item
-    {
-       .reviews-top
-       {
-           background-color: #EBF1F3;
-           img
-           {
-               width: 50px;
-               display: inline-block;
-           }
-           >a
-           {
-               display: inline-block;
-               font-size: 17px;
-               line-height: 25px;
-               height: 25px;
-               font-weight: bold;
-               color: #613A86;
-               margin-bottom: 0px;
-               vertical-align: middle;
-               margin-left: 10px;
-               &:hover
-               {
-                   background-color: #B157AF;
-                   color: white;
-               }
-           }
-       }
-       .movie-detail-reviews-info
-       {
-           margin-top: 14px;
-           >a
-           {
-               font-size: 16px;
-               padding: 5px;
-           }
-           .cmovie-detail-reviews-evaluate
-           {
-               display: inline-block;
-               .glyphicon-star
-               {
-                   color: orange;
-               }
-           }
-           p
-           {
-               text-indent: 2em;
-               font-size: 14px;
-           }
-       }
-    }
-    >a
-    {
-        margin-left:20px;
-        font-size:20px;  
-        &:before
-        {
-            content: ">";
-        }
-        &:hover
-        {
-            color: white;
-            background-color: blue;
-        }
-        
-    }
+.article-list {
+	li:not(.article-list-title) {
+		background: url("../img/article-arrow.png") no-repeat 0 center;
+		font-size: 12.6px;
+	}
+	.article-list-title {
+		background-color: @black;
+		color: white;
+	}
 }

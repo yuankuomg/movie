@@ -19,40 +19,32 @@
 .list-group-item:last-child {
   border-bottom: none;
 }
-.movie-rate {
-  margin-top: 73px;
-  border-top: 3px solid black;
+.your-atricle-title {
+  margin: 20px 0;
 }
-.movie-rate .list-group-item {
-  overflow: hidden;
+.your-atricle.well {
+  background: none;
 }
-.movie-rate .list-group-item h3 {
-  margin: 10px 0;
-}
-.movie-rate .list-group-item img {
-  margin-right: 3px;
-  float: left;
-}
-.movie-rate .list-group-item .item-des {
-  width: 70%;
-  float: left;
-}
-.movie-rate .list-group-item .item-des .item-title {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-.movie-rate .list-group-item .item-des p {
+.your-atricle .list-group-item {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  position: relative;
   margin: 0;
 }
-.movie-rate .movie-rate-title {
+.your-atricle .list-group-item > .badge {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.your-atricle .list-group-item:last-child {
   border-bottom: none;
 }
 @media (min-width: 769px) and (max-width: 991px) {
   .user-info {
     padding: 0 10% 0 5%;
   }
-  .movie-rate {
+  .your-atricle {
     margin-top: 0;
   }
 }
@@ -60,7 +52,7 @@
   .user-info {
     padding: 0 5%;
   }
-  .movie-rate {
+  .your-atricle {
     margin-top: 0;
   }
 }

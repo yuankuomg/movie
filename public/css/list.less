@@ -4,9 +4,6 @@ p {
 }
 .list-content {
 	padding-left: 20px;
-	.list-content-title {
-		padding-left: 15px;
-	}
 	.thumbnail {
 		margin-bottom: 40px;
 		.post-pic {
@@ -21,16 +18,23 @@ p {
 			}
 		}
 	}
-	.list-group-item {
+	.list-group .list-group-item {
 		border-radius: 0;
 		border: none;
 		border-bottom: 1px solid #ddd;
+		position: relative;
 		margin: 0;
+		&>.badge{
+			position: absolute;
+			right: 15px;
+			top: 10px;
+		}
 		&:last-child {
 			border-bottom: none;
 		}
 	}
 	.may-like {
+		margin-top: 73px;
 		border-top: 3px solid black;
 		.list-group-item {
 			overflow: hidden;
@@ -45,6 +49,7 @@ p {
 				width: 70%;
 				float: left;
 				.item-title {
+					display: inline-block;
 					overflow: hidden;
 					white-space: nowrap;
 					text-overflow: ellipsis;

@@ -1,219 +1,294 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>信息</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/common.css" />
-		<link rel="stylesheet" type="text/css" href="css/info.css" />
-		<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
-			<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
-	</head>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>信息</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="/css/info.css" />
+	<link rel="stylesheet" href="/css/mditor.min.css" />
+	<script src="/js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/js.cookie.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script src="/js/message.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+			$(function() {
+				$._ajax({
+					url: "/movielist",
+					dataType: "html"
+				}).done(function (html) {
+					$("#mid").append(html);
+				}).fail(function (err) {
+					$("#mid").parent().append("<h2>opps！加载没成功</h2>");
+				});
+				var mditor = new Mditor("#main", {
+					height: 450,
+					fixedHeight: true
+				});
+				$._ajax({
+					url: "/youratricle/" + JSON.parse(sessionStorage.getItem("login")).username,
+					dataType: "html"
+				}).done(function (html) {
+					$("#yourAtricle").append(html);
+				}).fail(function (err) {
+					$("#yourAtricle").parent().append("<h2>opps！加载没成功</h2>");
+				});
+				var mditor = new Mditor("#article", {
+					height: 450,
+					fixedHeight: true
+				});
+				$("#articleForm").submit(function(){
+					var mid = $("#mid").val(),
+						title = $("#title").val(),
+						main = $("#article").val()
+					if(!$.vaildate.isEmpty(mid)){
+						$.alt({
+							type: "warning",
+							msg: "请选择电影",
+							el:".articlemessage"
+						});
+						return false;
+					}
+					if(!$.vaildate.isEmpty(title)){
+						$.alt({
+							type: "warning",
+							msg: "请填写标题",
+							el:".articlemessage"
+						});
+						$("#title").focus();
+						return false;
+					}if(!$.vaildate.isEmpty(main)){
+						$.alt({
+							type: "warning",
+							msg: "请填写内容",
+							el:".articlemessage"
+						});
+						$("#main").focus();
+						return false;
+					}
+					var loginData = JSON.parse(sessionStorage.getItem("login"));
+					var data = {mid: mid, title: title, main: main, username: loginData.username};
+					$._ajax({
+						url: "/user/article",
+						type: "post",
+						data: data,
+						dataType: "json"
+					}).done(function(resData){
+						window.location.reload();
+					}).always(function(){
+					});
+					return false;
+				});
+				$("#infoForm").submit(function(){
+					var username = $("#username").val(),
+					password = $("#password").val();
+					if(!$.vaildate.isEmpty(username)){
+						$.alt({
+							type: "warning",
+							msg: "用户名不能为空",
+							el: ".usermessage"
+							});
+						$("#username").focus();
+						return false;
+					}
+					if(!$.vaildate.isEmpty(password)){
+						$.alt({
+							type: "warning",
+							msg: "密码不能为空",
+							el: ".usermessage"
+						});
+						$("#password").focus();
+						return false;
+					}
+					if(!$.vaildate.isWord(username) || !$.vaildate.isWord(password)){
+						$.alt({
+							type: "warning",
+							msg: "用户名或密码格式不正确",
+							el: ".usermessage"
+						});
+						$("#password").focus();
+						return false;
+					}
+					var data = {
+						username: username, 
+						password: password, 
+						sex: $("input[type='radio']:checked").val(),
+						birthdate: $("#birthDate").val(),
+						sign: $("#sign").val()
+					};
+					$._ajax({
+						url: "/user/update",
+						type: "post",
+						data: data,
+						dataType: "json"
+					}).done(function(resData){
+						if(resData.success){
+							window.location.reload();
+						}else{
+							$.alt({
+								type: "danger",
+								msg: resData.message,
+								el: ".usermessage"
+							});
+						}
+					});
+					return false;
+				});
+			})
+		</script>
+</head>
 
-	<body>
-		<nav class="sidebar">
-			<ul class="nav nav-pills nav-stacked">
-				<li><a href="/index.html"><i class="glyphicon glyphicon-home"></i></a></li>
-				<li><a href="/trailer.html"><i class="glyphicon glyphicon-film"></i></a></li>
-				<li><a href="/list.html"><i class="glyphicon glyphicon-th-list"></i></a></li>
-				<li><a href="/news.html"><i class="glyphicon glyphicon-list-alt"></i></a></li>
-				<li><a href="/info.html"><i class="glyphicon glyphicon-user"></i></a></li>
-				<li><a href="" data-toggle="modal" data-target="#searchModal"><i class="glyphicon glyphicon-search"></i></a></li>
-			</ul>
-		</nav>
-		<!--模态框开始-->
-		<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<!--<button class="btn modal-close-btn" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>-->
-					<div class="modal-body">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search for...">
-							<span class="input-group-btn">
+<body>
+	<nav class="sidebar">
+		<ul class="nav nav-pills nav-stacked">
+			<li><a href="/index.html"><i class="glyphicon glyphicon-home"></i></a></li>
+			<li><a href="/trailer.html"><i class="glyphicon glyphicon-film"></i></a></li>
+			<li><a href="/list.html"><i class="glyphicon glyphicon-th-list"></i></a></li>
+			<li><a href="/news.html"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+			<li><a href="/info.html"><i class="glyphicon glyphicon-user"></i></a></li>
+			<li><a href="" data-toggle="modal" data-target="#searchModal"><i class="glyphicon glyphicon-search"></i></a></li>
+		</ul>
+	</nav>
+	<!--模态框开始-->
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<!--<button class="btn modal-close-btn" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>-->
+				<div class="modal-body">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
         						<button class="btn btn-default" type="submit">Go!</button>
       						</span>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!--模态框结束-->
-		<div class="main">
-			<nav class="navbar navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<span class="navbar-brand">Movie Info</span>
-					</div>
-					<form class="navbar-form navbar-right" role="search">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search for...">
-							<span class="input-group-btn">
-        						<button class="btn btn-default" type="submit">Go!</button>
-      						</span>
-						</div>
-					</form>
+	</div>
+	<!--模态框结束-->
+	<div class="main">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<span class="navbar-brand">Movie Info</span>
+					<a href="/info.html" class="navbar-text" id="user"></a><a href='/user/logout' class='navbar-text' id='logout' style="display:none;">登出</a>
 				</div>
-			</nav>
-			<div class="row">
-				<div class="col-xs-12 col-md-6 user-info">
-					<h2 class="user-info-title">用户信息</h2>
-					<form class="form-horizontal" id="infoForm">
-						<div class="form-group">
-							<label for="username" class="col-xs-12 col-sm-2 control-label">用户名：</label>
-							<div class="col-xs-12 col-sm-10">
-								<input type="text" value="<%=user.username%>" class="form-control" id="username" placeholder="用户名" required="required" />
-							</div>
+				<form class="navbar-form navbar-right" role="search" action="/searchresult.html" id="searchForm">
+					<div class="input-group">
+						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Go!</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</nav>
+		<div class="row">
+			<div class="col-xs-12 col-md-6 user-info">
+				<h2 class="user-info-title">用户信息</h2>
+				<div class="usermessage text-center"></div>
+				<form class="form-horizontal" id="infoForm">
+					<div class="form-group">
+						<label for="username" class="col-xs-12 col-sm-2 control-label">用户名：</label>
+						<div class="col-xs-12 col-sm-10">
+							<input type="text" readonly="readonly" value="<%=user.username%>" class="form-control" id="username" placeholder="用户名" />
 						</div>
-						<div class="form-group">
-							<label for="password" class="col-xs-12 col-sm-2 control-label">密码：</label>
-							<div class="col-xs-12 col-sm-10">
-								<input type="password" value="<%=user.password%>" class="form-control" id="password" placeholder="密码" required="required" pattern="^[A-Za-z0-9]+$" title="只能输入字母和数字" />
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="password" class="col-xs-12 col-sm-2 control-label">密码：</label>
+						<div class="col-xs-12 col-sm-10">
+							<input type="password" value="<%=user.password%>" class="form-control" id="password" placeholder="密码" />
 						</div>
-						<div class="form-group">
-							<label class="col-xs-12 col-sm-2 control-label">性别：</label>
-							<div class="col-xs-12 col-sm-10">
-								<label class="radio-inline">
+					</div>
+					<div class="form-group">
+						<label class="col-xs-12 col-sm-2 control-label">性别：</label>
+						<div class="col-xs-12 col-sm-10">
+							<label class="radio-inline">
 		  							<input type="radio" name="sex" id="male" value="男" <%=user.sex == '男' ? "checked='checked'" : ''%>>男
 								</label>
-								<label class="radio-inline">
+							<label class="radio-inline">
 		  							<input type="radio" name="sex" id="female" value="女" <%=user.sex == '女' ? "checked='checked'" : ''%>>女
 								</label>
-								<label class="radio-inline">
+							<label class="radio-inline">
 		  							<input type="radio" name="sex" id="secret" value="保密" <%=user.sex == '保密' ? "checked='checked'" : ''%>>保密
 								</label>
-							</div>
 						</div>
-						<div class="form-group">
-							<label for="birthDate" class="col-xs-12 col-sm-2 control-label">出生日期：</label>
-							<div class="col-xs-12 col-sm-10">
-								<input type="date" value="<%=user.birthdate%>" class="form-control" id="birthDate" placeholder="出生日期" />
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="birthDate" class="col-xs-12 col-sm-2 control-label">出生日期：</label>
+						<div class="col-xs-12 col-sm-10">
+							<input type="date" value="<%=user.birthdate%>" class="form-control" id="birthDate" placeholder="出生日期" />
 						</div>
-						<div class="form-group">
-							<label for="mySign" class="col-xs-12 col-sm-2 control-label">我的签名：</label>
-							<div class="col-xs-12 col-sm-10">
-								<textarea class="form-control" id="mySign" rows="5" placeholder="写点什么吧。。。"><%=user.sign%></textarea>
-							</div>
+					</div>
+					<div class="form-group">
+						<label for="sign" class="col-xs-12 col-sm-2 control-label">我的签名：</label>
+						<div class="col-xs-12 col-sm-10">
+							<textarea class="form-control" id="sign" rows="5" placeholder="写点什么吧。。。"><%=user.sign%></textarea>
 						</div>
-						<div class="form-group">
-							<div class="col-xs-12 text-center">
-								<button type="submit" class="btn btn-primary">保存信息</button>
-							</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-12 text-center">
+							<button type="submit" class="btn btn-primary">保存信息</button>
 						</div>
-					</form>
-				</div>
-				<div class="col-xs-12 col-md-6">
-					<ul class="list-group movie-rate">
-						<li class="list-group-item movie-rate-title">
-							<h3>你评分的电影</h3>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-1.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">美国队长3：内战</h4>
-								<p>你的评分：
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-2.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">疯狂动物城</h4>
-								<p>你的评分：
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-3.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">星际穿越</h4>
-								<p>你的评分：
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-4.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">超人大战蝙蝠侠</h4>
-								<p>你的评分：
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-5.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">复仇者联盟2：奥创纪元</h4>
-								<p>你的评分：
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								</p>
-							</div>
-						</li>
-						<li class="list-group-item">
-							<img src="img/list-icon-6.jpg" />
-							<div class="item-des">
-								<h4 class="item-title">敢死队3</h4>
-								<p>你的评分：
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-									<a href=""><i class="glyphicon glyphicon-star-empty"></i></a>
-								</p>
-							</div>
-						</li>
-					</ul>
+					</div>
+				</form>
+			</div>
+			<div class="col-xs-12 col-md-6">
+				<h2 class="your-atricle-title">你的影评</h2>
+				<ul class="list-group your-atricle well" id="yourAtricle">
+				</ul>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xs-12">
+				<h2 class="user-info-title">写影评</h2>
+				<form id="articleForm">
+					<div class="form-group">
+						<select id="mid" class="form-control">
+								<option value="">请选择电影</option>
+							</select>
+					</div>
+					<div class="form-group">
+						<input class="form-control" id="title"></input>
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" id="article"></textarea>
+					</div>
+					<div class="articlemessage text-center"></div>
+					<div class="form-group text-center">
+						<button type="submit" class="btn btn-lg btn-primary">提交</button>
+					</div>
+
+				</form>
+			</div>
+		</div>
+
+		<div class="footer">
+			<div class="footer-header">
+				<div class="skew">
+
 				</div>
 			</div>
-			<div class="footer">
-				<div class="footer-header">
-					<div class="skew">
-
-					</div>
+			<div class="row footer-body">
+				<div class="col-xs-12 col-sm-4 website-des">
+					<p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
 				</div>
-				<div class="row footer-body">
-					<div class="col-xs-12 col-sm-4 website-des">
-						<p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-						<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
-					</div>
-					<div class="col-xs-12 col-sm-4 col-sm-offset-2 contact">
-						<h4>联系我们</h4>
-						<address>
-  							<strong>地址：</strong>加悦大厦&nbsp;&nbsp;龙口大厦<br>
-  							<strong>电话：</strong>(123) 456-7890
-						</address>
-					</div>
+				<div class="col-xs-12 col-sm-4 col-sm-offset-2 contact">
+					<h4>联系我们</h4>
+					<address>
+						<strong>地址：</strong>加悦大厦&nbsp;&nbsp;龙口大厦<br>
+						<strong>电话：</strong>(123) 456-7890
+					</address>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
+<script src="js/mditor.js"></script>
 
 </html>

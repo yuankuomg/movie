@@ -1,330 +1,163 @@
-.movie-detail-title-h5 {
-  font-size: 20px;
-  color: #5D9802;
-  display: inline-block;
+p {
+  word-wrap: break-word;
 }
-.movie-detail-btn-right {
-  position: absolute;
-  top: 10px;
-  right: 0px;
-  border: none;
-  font-size: 14px;
-  border-radius: 5px;
-  padding: 3px 5px;
-  color: blue;
-  background-color: paleturquoise;
-}
-.movie-detail-btn-right:hover {
-  background-color: deeppink;
-  color: white;
-}
-.movie-detail-main {
-  margin-top: 50px;
-}
-.movie-detail-top img {
-  display: inline-block;
-}
-.movie-detail-top .movie-detail-detail {
-  display: inline-block;
+.list-content {
   padding-left: 20px;
-  vertical-align: middle;
 }
-.movie-detail-top .movie-detail-detail label {
-  color: gray;
-  font-size: 16px;
-  margin-right: 10px;
+.list-content .thumbnail {
+  margin-bottom: 40px;
 }
-.movie-detail-top .movie-detail-detail .movie-type {
-  font-size: 10px;
+.list-content .thumbnail .post-pic {
+  padding-left: 0;
 }
-.movie-detail-top .movie-detail-detail .movie-detail-span {
-  padding: 4px;
+.list-content .thumbnail .movie-des {
+  padding-left: 0;
 }
-.movie-detail-operate .row1 {
-  margin-top: 20px;
+.list-content .thumbnail .movie-des .caption h3 {
+  margin-top: 0;
 }
-.movie-detail-operate .row1 input {
-  padding: 6px;
-  background-color: #D1C8F5;
-  border-radius: 6px;
-  margin: 4px;
+.list-content .list-group .list-group-item {
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid #ddd;
+  position: relative;
+  margin: 0;
 }
-.movie-detail-operate .row1 input:hover {
-  background-color: purple;
+.list-content .list-group .list-group-item > .badge {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.list-content .list-group .list-group-item:last-child {
+  border-bottom: none;
+}
+.list-content .may-like {
+  margin-top: 73px;
+  border-top: 3px solid black;
+}
+.list-content .may-like .list-group-item {
+  overflow: hidden;
+}
+.list-content .may-like .list-group-item h3 {
+  margin: 10px 0;
+}
+.list-content .may-like .list-group-item img {
+  margin-right: 3px;
+  float: left;
+}
+.list-content .may-like .list-group-item .item-des {
+  width: 70%;
+  float: left;
+}
+.list-content .may-like .list-group-item .item-des .item-title {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.list-content .may-like .list-group-item .item-des p {
+  margin: 0;
+}
+.list-content .may-like .may-like-title {
+  border-bottom: none;
+}
+.list-content .article-list li:not(.article-list-title) {
+  background: url("../img/article-arrow.png") no-repeat 0 center;
+  font-size: 12.6px;
+}
+.list-content .article-list .article-list-title {
+  background-color: #383838;
   color: white;
 }
-.movie-detail-operate .row1 .movie-detail-evaluate {
-  display: inline-block;
+@media (max-width: 768px) {
+  .movie-list .thumbnail .movie-des .caption h3 {
+    margin-top: 10px;
+  }
 }
-.movie-detail-operate .row1 .movie-detail-evaluate label {
-  font-size: 16px;
-  margin-left: 10px;
+@media (max-width: 992px) {
+  .may-like .list-group-item .item-des {
+    width: auto;
+  }
 }
-.movie-detail-operate .row2 {
-  padding-left: 10px;
+.thumb-pic2 {
+  width: 100%;
 }
-.movie-detail-operate .row2 a {
-  padding: 10px;
-  display: inline-block;
-  color: #37379E;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 25px;
-  margin-bottom: 0;
+hr {
+  width: 100%;
+  border-top: 3px solid #383838;
+  margin: 5px 0 5px;
 }
-.movie-detail-operate .row2 a:hover {
-  color: orange;
-  cursor: pointer;
+.movie-content {
+  padding-left: 20px;
+  margin-top: 30px;
 }
-.movie-detail-operate .row2 span {
-  vertical-align: middle;
-  line-height: 25px;
-}
-.movie-detail-operate .row2 .dropdown-toggle {
+.caption hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
   border: 0;
-  color: #37379E;
-  padding-top: 0;
+  border-top: 1px solid #eee;
 }
-.movie-detail-operate .row2 .dropdown-menu {
-  min-width: 100px;
+.movie-name {
+  margin: 10px 0 20px;
 }
-.movie-detail-operate .row2 .dropdown-menu img {
-  width: 20px;
+.story .story-title {
+  margin: 20px 0 5px;
 }
-.movie-detail-operate .row2 .dropdown-menu a {
-  padding: 5px;
-}
-.movie-detail-synopsis h5 {
-  font-size: 20px;
-  color: #5D9802;
-  display: inline-block;
-}
-.movie-detail-synopsis p {
+.story .story-des {
   text-indent: 2em;
+}
+.movie-comment .movie-comment-title {
+  display: inline-block;
+}
+.movie-comment .movie-comment-title span {
   font-size: 14px;
-  line-height: 26px;
 }
-.movie-detail-pic h5 {
-  font-size: 20px;
-  color: #5D9802;
-  display: inline-block;
-}
-.movie-detail-pic span:nth-child(3) {
-  color: #3737E4;
-  font-size: 14px;
-  padding: 6px;
-  margin-left: 20px;
-}
-.movie-detail-pic span:nth-child(4) {
-  color: darkgray;
-}
-.movie-detail-pic .movie-detail-span {
-  padding: 8px;
-}
-.movie-detail-pic > a {
-  color: #3737E4;
-}
-.movie-detail-also-like h5 {
-  font-size: 20px;
-  color: #5D9802;
-  display: inline-block;
-}
-.movie-detail-also-like .caption {
-  text-align: center;
-}
-.movie-detail-short-comment {
-  position: relative;
-}
-.movie-detail-short-comment h5 {
-  font-size: 20px;
-  color: #5D9802;
-  display: inline-block;
-}
-.movie-detail-short-comment .short-comment-name {
-  font-size: 16px;
-}
-.movie-detail-short-comment .cmovie-detail-comment-evaluate {
-  margin: 0px 10px;
-}
-.movie-detail-short-comment .comment-total {
-  color: #04789E;
-  font-size: 13px;
-}
-.movie-detail-short-comment .comment-total:after {
-  content: ")";
-}
-.movie-detail-short-comment .comment-total:before {
-  content: "(";
-}
-.movie-detail-short-comment > input {
-  position: absolute;
-  top: 10px;
-  right: 0px;
+.movie-comment .comment-list .list-group-item {
   border: none;
-  font-size: 14px;
-  border-radius: 5px;
-  padding: 3px 5px;
-  color: blue;
-  background-color: paleturquoise;
+  border-bottom: 1px solid #ddd;
+  margin: 0;
 }
-.movie-detail-short-comment > input:hover {
-  background-color: deeppink;
-  color: white;
-}
-.movie-detail-short-comment .glyphicon-star {
-  color: orange;
-}
-.movie-detail-short-comment .cmovie-detail-comment-evaluate {
-  display: inline-block;
-}
-.movie-detail-short-comment p {
-  margin-top: 10px;
-  font-size: 12px;
-}
-.movie-detail-question {
-  position: relative;
-}
-.movie-detail-question h5 {
-  font-size: 20px;
-  color: #5D9802;
-  display: inline-block;
-}
-.movie-detail-question .question-total {
-  color: #04789E;
-  font-size: 13px;
-}
-.movie-detail-question .question-total:after {
-  content: ")";
-}
-.movie-detail-question .question-total:before {
-  content: "(";
-}
-.movie-detail-question > input {
-  position: absolute;
-  top: 10px;
-  right: 0px;
+.movie-comment .comment-list .list-group-item:last-child {
   border: none;
-  font-size: 14px;
-  border-radius: 5px;
-  padding: 3px 5px;
-  color: blue;
-  background-color: paleturquoise;
 }
-.movie-detail-question > input:hover {
-  background-color: deeppink;
-  color: white;
-}
-.movie-detail-question .list-group {
-  margin-bottom: 10px;
-}
-.movie-detail-question .list-group-item {
-  border: none;
-  border-bottom: 2px dashed lightslategray;
-}
-.movie-detail-question .list-group-item > a {
-  font-size: 16px;
-}
-.movie-detail-question .list-group-item > a:hover {
-  background-color: deepskyblue;
-  color: black;
-}
-.movie-detail-question .list-group-item span {
-  font-size: 14px;
-  color: #148DB5;
-}
-.movie-detail-question > a {
-  margin-left: 10px;
-  font-size: 16px;
-}
-.movie-detail-question > a:before {
-  content: ">";
-}
-.movie-detail-question > a:hover {
-  background-color: darkslateblue;
-  color: white;
-}
-.movie-detail-reviews {
+.movie-comment .btn-comment {
+  float: right;
   margin-top: 20px;
-  position: relative;
 }
-.movie-detail-reviews h5 {
-  font-size: 20px;
-  color: #5D9802;
-  display: inline-block;
+.may-like {
+  border-top: 3px solid black;
 }
-.movie-detail-reviews .reviews-total {
-  color: #04789E;
-  font-size: 13px;
+.may-like .list-group-item {
+  overflow: hidden;
 }
-.movie-detail-reviews .reviews-total:after {
-  content: ")";
+.may-like .list-group-item h3 {
+  margin: 10px 0;
 }
-.movie-detail-reviews .reviews-total:before {
-  content: "(";
+.may-like .list-group-item img {
+  margin-right: 3px;
+  float: left;
 }
-.movie-detail-reviews > input {
-  position: absolute;
-  top: 10px;
-  right: 0px;
-  border: none;
-  font-size: 14px;
-  border-radius: 5px;
-  padding: 3px 5px;
-  color: blue;
-  background-color: paleturquoise;
+.may-like .list-group-item .item-des {
+  width: 70%;
+  float: left;
 }
-.movie-detail-reviews > input:hover {
-  background-color: deeppink;
+.may-like .list-group-item .item-des .item-title {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.may-like .list-group-item .item-des p {
+  margin: 0;
+}
+.may-like .may-like-title {
+  border-bottom: none;
+}
+.article-list li:not(.article-list-title) {
+  background: url("../img/article-arrow.png") no-repeat 0 center;
+  font-size: 12.6px;
+}
+.article-list .article-list-title {
+  background-color: #383838;
   color: white;
-}
-.movie-detail-reviews .list-group-item .reviews-top {
-  background-color: #EBF1F3;
-}
-.movie-detail-reviews .list-group-item .reviews-top img {
-  width: 50px;
-  display: inline-block;
-}
-.movie-detail-reviews .list-group-item .reviews-top > a {
-  display: inline-block;
-  font-size: 17px;
-  line-height: 25px;
-  height: 25px;
-  font-weight: bold;
-  color: #613A86;
-  margin-bottom: 0px;
-  vertical-align: middle;
-  margin-left: 10px;
-}
-.movie-detail-reviews .list-group-item .reviews-top > a:hover {
-  background-color: #B157AF;
-  color: white;
-}
-.movie-detail-reviews .list-group-item .movie-detail-reviews-info {
-  margin-top: 14px;
-}
-.movie-detail-reviews .list-group-item .movie-detail-reviews-info > a {
-  font-size: 16px;
-  padding: 5px;
-}
-.movie-detail-reviews .list-group-item .movie-detail-reviews-info .cmovie-detail-reviews-evaluate {
-  display: inline-block;
-}
-.movie-detail-reviews .list-group-item .movie-detail-reviews-info .cmovie-detail-reviews-evaluate .glyphicon-star {
-  color: orange;
-}
-.movie-detail-reviews .list-group-item .movie-detail-reviews-info p {
-  text-indent: 2em;
-  font-size: 14px;
-}
-.movie-detail-reviews > a {
-  margin-left: 20px;
-  font-size: 20px;
-}
-.movie-detail-reviews > a:before {
-  content: ">";
-}
-.movie-detail-reviews > a:hover {
-  color: white;
-  background-color: blue;
 }
 /*# sourceMappingURL=movie_detail.css.map */

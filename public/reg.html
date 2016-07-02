@@ -1,129 +1,197 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>注册</title>
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/common.css" />
-		<link rel="stylesheet" type="text/css" href="css/reg.css" />
-		<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
-		<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
-	</head>
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>注册</title>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/common.css" />
+	<link rel="stylesheet" type="text/css" href="css/reg.css" />
+	<script src="js/jquery-1.12.3.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/bootstrap-hover-dropdown.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/message.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/common.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(function(){
+      		$("#regForm").submit(function(e){
+			var uname = $("#username").val(),
+			pwd = $("#password").val();
+			if(!$.vaildate.isEmpty(uname)){
+			$.alt({
+				type: "warning",
+				msg: "用户名不能为空",
+				el: ".message"
+				});
+			$("#username").focus();
+			return false;
+			}
+			if(!$.vaildate.isEmpty(pwd)){
+				$.alt({
+					type: "warning",
+					msg: "密码不能为空",
+					el: ".message"
+				});
+				$("#password").focus();
+				return false;
+			}
+			if(!$.vaildate.isWord(uname) || !$.vaildate.isWord(pwd)){
+				$.alt({
+					type: "warning",
+					msg: "用户名或密码格式不正确",
+					el: ".message"
+				});
+				$("#password").focus();
+				return false;
+			}
+			var data = {
+				username: uname, 
+				password: pwd, 
+				sex: $("input[type='radio']:checked").val(),
+				birthdate: $("#birthDate").val(),
+				sign: $("#sign").val()
+			};
+			$._ajax({
+				url: "/user/reg",
+				type: "post",
+				data: data,
+				dataType: "json"
+			}).done(function(resData){
+				if(resData.success){
+					$.alt({
+						type: "success",
+						msg: "注册成功",
+						el: ".message"
+					});
+				sessionStorage.setItem("login", JSON.stringify({username: uname, password: pwd}));
+				window.location = "/index.html";
+				}else{
+					$.alt({
+						type: "danger",
+						msg: resData.message,
+						el: ".message"
+					});
+				}
+			});
+			return false;
+			});
+		});
+		</script>
+</head>
 
-	<body>
-		<nav class="sidebar">
-			<ul class="nav nav-pills nav-stacked">
-				<li><a href="index.html"><i class="glyphicon glyphicon-home"></i></a></li>
-				<li><a href="trailer.html"><i class="glyphicon glyphicon-film"></i></a></li>
-				<li><a href="list.html"><i class="glyphicon glyphicon-th-list"></i></a></li>
-				<li><a href="news.html"><i class="glyphicon glyphicon-list-alt"></i></a></li>
-				<li class="active"><a href="info.html"><i class="glyphicon glyphicon-user"></i></a></li>
-				<li><a href="" data-toggle="modal" data-target="#searchModal"><i class="glyphicon glyphicon-search"></i></a></li>
-			</ul>
-		</nav>
-		<!--模态框开始-->
-		<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
-			<div class="modal-dialog" role="document">
-				<div class="modal-content">
-					<!--<button class="btn modal-close-btn" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>-->
-					<div class="modal-body">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search for...">
-							<span class="input-group-btn">
+<body>
+	<nav class="sidebar">
+		<ul class="nav nav-pills nav-stacked">
+			<li><a href="index.html"><i class="glyphicon glyphicon-home"></i></a></li>
+			<li><a href="trailer.html"><i class="glyphicon glyphicon-film"></i></a></li>
+			<li><a href="list.html"><i class="glyphicon glyphicon-th-list"></i></a></li>
+			<li><a href="news.html"><i class="glyphicon glyphicon-list-alt"></i></a></li>
+			<li><a href="info.html"><i class="glyphicon glyphicon-user"></i></a></li>
+			<li><a href="" data-toggle="modal" data-target="#searchModal"><i class="glyphicon glyphicon-search"></i></a></li>
+		</ul>
+	</nav>
+	<!--模态框开始-->
+	<div class="modal fade" id="searchModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<!--<button class="btn modal-close-btn" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i></button>-->
+				<div class="modal-body">
+					<div class="input-group">
+						<input type="text" class="form-control" placeholder="Search for...">
+						<span class="input-group-btn">
         						<button class="btn btn-default" type="submit">Go!</button>
       						</span>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!--模态框结束-->
-		<div class="main">
-			<nav class="navbar navbar-default">
-				<div class="container-fluid">
-					<div class="navbar-header">
-						<span class="navbar-brand">Movie Info</span>
-					</div>
-					<form class="navbar-form navbar-right" role="search">
-						<div class="input-group">
-							<input type="text" class="form-control" placeholder="Search for...">
-							<span class="input-group-btn">
-        						<button class="btn btn-default" type="submit">Go!</button>
-      						</span>
-						</div>
-					</form>
+	</div>
+	<!--模态框结束-->
+	<div class="main">
+		<nav class="navbar navbar-default">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<span class="navbar-brand">Movie Info</span>
+					<a href="/info.html" class="navbar-text" id="user"></a><a href='/user/logout' class='navbar-text' id='logout' style="display:none;">登出</a>
 				</div>
-			</nav>
-			<form class="form-horizontal" id="regForm">
-				<div class="form-group">
-					<label for="userNameInput" class="col-xs-12 col-sm-2 control-label">用户名：</label>
-					<div class="col-xs-12 col-sm-10">
-						<input type="text" class="form-control" id="userNameInput" placeholder="用户名" required="required" />
+				<form class="navbar-form navbar-right" role="search" action="/searchresult.html" id="searchForm">
+					<div class="input-group">
+						<input type="text" class="form-control" name="keyword" id="keyword" placeholder="Search for...">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">Go!</button>
+						</span>
 					</div>
+				</form>
+			</div>
+		</nav>
+		<div class="message text-center"></div>
+		<form class="form-horizontal" id="regForm">
+			<div class="form-group">
+				<label for="username" class="col-xs-12 col-sm-2 control-label">用户名：</label>
+				<div class="col-xs-12 col-sm-10">
+					<input type="text" class="form-control" id="username" placeholder="用户名" />
 				</div>
-				<div class="form-group">
-					<label for="password" class="col-xs-12 col-sm-2 control-label">密码：</label>
-					<div class="col-xs-12 col-sm-10">
-						<input type="password" class="form-control" id="password" placeholder="密码" required="required" pattern="^[A-Za-z0-9]+$" title="只能输入字母和数字" />
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="password" class="col-xs-12 col-sm-2 control-label">密码：</label>
+				<div class="col-xs-12 col-sm-10">
+					<input type="password" class="form-control" id="password" placeholder="密码" />
 				</div>
-				<div class="form-group">
-					<label class="col-xs-12 col-sm-2 control-label">性别：</label>
-					<div class="col-xs-12 col-sm-10">
-						<label class="radio-inline">
+			</div>
+			<div class="form-group">
+				<label class="col-xs-12 col-sm-2 control-label">性别：</label>
+				<div class="col-xs-12 col-sm-10">
+					<label class="radio-inline">
 		  							<input type="radio" name="sex" id="male" value="男" checked="checked">男
 								</label>
-						<label class="radio-inline">
+					<label class="radio-inline">
 		  							<input type="radio" name="sex" id="female" value="女">女
 								</label>
-						<label class="radio-inline">
+					<label class="radio-inline">
 		  							<input type="radio" name="sex" id="secret" value="保密">保密
 								</label>
-					</div>
 				</div>
-				<div class="form-group">
-					<label for="birthDate" class="col-xs-12 col-sm-2 control-label">出生日期：</label>
-					<div class="col-xs-12 col-sm-10">
-						<input type="date" class="form-control" id="birthDate" placeholder="出生日期" />
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="birthDate" class="col-xs-12 col-sm-2 control-label">出生日期：</label>
+				<div class="col-xs-12 col-sm-10">
+					<input type="date" class="form-control" id="birthDate" placeholder="出生日期" />
 				</div>
-				<div class="form-group">
-					<label for="mySign" class="col-xs-12 col-sm-2 control-label">我的签名：</label>
-					<div class="col-xs-12 col-sm-10">
-						<textarea type="password" class="form-control" id="mySign" rows="5" placeholder="写点什么吧。。。"></textarea>
-					</div>
+			</div>
+			<div class="form-group">
+				<label for="sign" class="col-xs-12 col-sm-2 control-label">我的签名：</label>
+				<div class="col-xs-12 col-sm-10">
+					<textarea type="password" class="form-control" id="sign" rows="5" placeholder="写点什么吧。。。"></textarea>
 				</div>
-				<div class="form-group">
-					<div class="col-xs-12 text-center">
-						<button type="submit" class="btn btn-primary">保存信息</button>
-					</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-12 text-center">
+					<button type="submit" class="btn btn-primary">保存信息</button>
 				</div>
-			</form>
-			<div class="footer">
-				<div class="footer-header">
-					<div class="skew">
+			</div>
+		</form>
+		<div class="footer">
+			<div class="footer-header">
+				<div class="skew">
 
-					</div>
 				</div>
-				<div class="row footer-body">
-					<div class="col-xs-12 col-sm-4 website-des">
-						<p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
-						<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
-					</div>
-					<div class="col-xs-12 col-sm-4 col-sm-offset-2 contact">
-						<h4>联系我们</h4>
-						<address>
-  							<strong>地址：</strong>加悦大厦&nbsp;&nbsp;龙口大厦<br>
-  							<strong>电话：</strong>(123) 456-7890
-						</address>
-					</div>
+			</div>
+			<div class="row footer-body">
+				<div class="col-xs-12 col-sm-4 website-des">
+					<p>It is a long established fact that a reader will be distracted by the readable content of a page.</p>
+					<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered.</p>
+				</div>
+				<div class="col-xs-12 col-sm-4 col-sm-offset-2 contact">
+					<h4>联系我们</h4>
+					<address>
+						<strong>地址：</strong>加悦大厦&nbsp;&nbsp;龙口大厦<br>
+						<strong>电话：</strong>(123) 456-7890
+					</address>
 				</div>
 			</div>
 		</div>
-	</body>
+	</div>
+</body>
 
 </html>

@@ -4,9 +4,6 @@ p {
 .list-content {
   padding-left: 20px;
 }
-.list-content .list-content-title {
-  padding-left: 15px;
-}
 .list-content .thumbnail {
   margin-bottom: 40px;
 }
@@ -19,16 +16,23 @@ p {
 .list-content .thumbnail .movie-des .caption h3 {
   margin-top: 0;
 }
-.list-content .list-group-item {
+.list-content .list-group .list-group-item {
   border-radius: 0;
   border: none;
   border-bottom: 1px solid #ddd;
+  position: relative;
   margin: 0;
 }
-.list-content .list-group-item:last-child {
+.list-content .list-group .list-group-item > .badge {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+.list-content .list-group .list-group-item:last-child {
   border-bottom: none;
 }
 .list-content .may-like {
+  margin-top: 73px;
   border-top: 3px solid black;
 }
 .list-content .may-like .list-group-item {
@@ -46,6 +50,7 @@ p {
   float: left;
 }
 .list-content .may-like .list-group-item .item-des .item-title {
+  display: inline-block;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
